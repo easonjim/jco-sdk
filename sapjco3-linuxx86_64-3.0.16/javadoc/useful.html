@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<HTML>
+<HEAD>
+
+<TITLE>
+SAP Java Connector 3.0 Configuration and Requirements
+</TITLE>
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="./sap.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="SAP Java Connector 3.0 Configuration and Requirements";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="800" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="intro.html"><FONT CLASS="NavBarFont1"><B>Home</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="installation.html"><FONT CLASS="NavBarFont1"><B>Installation</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Configuration</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index.html" target="_blank"><FONT CLASS="NavBarFont1"><B>API Documentation</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="examples.html"><FONT CLASS="NavBarFont1"><B>Examples</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="releasenotes.html"><FONT CLASS="NavBarFont1"><B>Release Notes</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN=2 BGCOLOR="white" CLASS="NavBarCell2">&nbsp;</TD>
+</TR>
+
+<TR><TD>
+<HR>
+<CENTER>
+<h1>SAP Java Connector 3.0</h1>
+</CENTER>
+</TD>
+</TR>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+2">
+<B>Configuration and Requirements</B></FONT>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Components of the SAP Java Connector</b>
+</td></tr>
+
+<tr><td>
+    The SAP Java Connector 3.0 runtime environment consists of 2 parts:
+    <ul>
+        <li>sapjco3.jar - The archive containing JCo's Java runtime classes
+        <li>{library prefix}sapjco3{shared library extension} - The JNI library containing
+            JCo's native code
+    </ul>
+
+    JCo's JNI library contains the native code for the network communication. There is only a loose
+    coupling between the JCo archive and the JNI library, however JCo needs a specific minimum version
+    of the JNI library which is usually the one being shipped together with the JCo archive in the
+    distribution package.<br>
+    <br>
+    <em>Note:</em> If you are using a 32-bit JVM you will also need the 32-bit JCo JNI library,
+    regardless if you are running on a 32-bit or 64-bit operating system.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Runtime initialization</b>
+</td></tr>
+
+<tr><td>
+    When an application references a JCo class for the first time it will be loaded by the associated
+    class loader. During this process JCo's static initializer will be executed. This routine will
+    search and load the JCo JNI library by using the following algorithm:<br>
+    <ol>
+        <li>Try to load the sapjco3 JNI library from the same directory where the
+            <code>sapjco3.jar</code> file resides.<br>
+
+        <li>Try to load the sapjco3 JNI library from a platform dependent subdirectory where the
+            <code>sapjco3.jar</code> file resides. The appropriate JNI library loading path is
+            determined by considering the currently used operating system and JVM runtime environment
+            and refers to one of the following subdirectories:<br>
+            <code>ntamd64, ntintel, ntia64, linuxx86_64, linuxintel, linuxppc64, linuxppc64le, linuxia64,
+            linuxs390x, darwinintel64, darwinintel, rs6000_64, hpia64, hp_64, sunx86_64, sun_64, os390_64,
+            as400_pase_64</code><br>
+
+        <li>Search the sapjco3 JNI library along the directory path defined in the
+            <code>java.library.path</code> system property from left to right, and if found load
+            it from there.<br>
+            <em>Note:</em> If this property is not set manually, the JVM will usually set the OS specific
+            library path environment variable as the default <code>java.library.path</code> system
+            property at startup.<br>
+
+        <li>Let the JVM handle the loading of the sapjco3 JNI library by delegating
+            this task to its <code>System.loadLibrary(String libname)</code> method.
+    </ol>
+    If the sapjco3 JNI library cannot be found or loaded, you will get an <code>UnsatisfiedLinkError</code>
+    with details provided from the operating system.<br>
+    This error message may be caused for one of the following reasons:
+    <ul>
+        <li>The sapjco3 JNI library cannot be found by using the above described
+            algorithm, because you unintentionally installed it to the wrong directory or forgot
+            to specify its directory in the OS specific library path environment variable or alternatively
+            in the <code>java.library.path</code> system property.
+        <li>The version of the found sapjco3 JNI library is too old.
+        <li>The found sapjco3 JNI library lacks the execute permission flag.
+        <li>The found sapjco3 JNI library does not have the same bit width as the JVM (32-bit vs. 64-bit).
+        <li>The found sapjco3 JNI library is from a different JCo distribution and is not for use with
+            your operating system and/or your hardware processor.
+        <li>The found sapjco3 JNI library requires a higher operating system version.
+    </ul>
+</td></tr>
+<tr><td>
+    Please note that JCo sometimes investigates the call stack and hence needs stack traces for working
+    properly.<br>
+    Hence, the JVM special option <code>-XX:-StackTraceInThrowable</code> cannot be used.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Version dialog / Smoke installation test</b>
+</td></tr>
+
+<tr><td>
+    You can check if JCo is installed correctly by starting its About dialog. This can conveniently be done
+    by using the command<br>
+    <br>
+       <code>&nbsp; &nbsp;java -jar {sapjco3-path}/sapjco3.jar</code><br>
+    or<br>
+       <code>&nbsp; &nbsp;java -classpath {sapjco3-path}/sapjco3.jar com.sap.conn.jco.rt.About</code><br>
+	<br>
+    The command will pop up a dialog containing all relevant JCo version information. On non-windowing systems
+    you can get the same information printed to the console by typing<br>
+    <br>
+       <code>&nbsp; &nbsp;java -jar {sapjco3-path}/sapjco3.jar -stdout &nbsp;[-noManifest | -noDigests]</code><br>
+    or<br>
+       <code>&nbsp; &nbsp;java -classpath {sapjco3-path}/sapjco3.jar com.sap.conn.jco.rt.About -stdout &nbsp;[-noManifest | -noDigests]</code><br>
+    <br>
+    There should be no exception or error thrown and all versions should be listed with their correct version
+    numbers and date. Otherwise please see the above chapter "Runtime initialization" for possible installation
+    or configuration errors.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Network configuration</b>
+</td></tr>
+
+<tr><td>
+    JCo uses the CPI-C protocol based on TCP/IP for its low level network communication. Usually the TCP/IP protocol is a
+    communication service provided by the operating system. So, as a prerequisite for JCo to work, the TCP/IP
+    service must be configured.<br>
+    If you have a working SAPGUI installed on your machine all necessary TCP/IP configuration steps should have
+    been already made during its installation process. But if you install JCo from scratch on a new system, you
+    have to take care of the following:<p>
+    <ul>
+        <li>Make sure that the SAP application, message and gateway servers or alternatively the SAP router
+            can be reached physically by using their IP addresses (<code>ping&nbsp;&lt;nnn.nnn.nnn.nnn&gt;</code>).
+            If this won't work please ask your network administrator for help.
+        <li>If desired, make sure that the SAP application, message and gateway servers or alternatively the SAP
+            router can also be reached by using their logical host names (<code>ping&nbsp;&lt;hostname&gt;</code>).
+            If they cannot be reached this way please check your DNS (Domain Name Service) entries or maintain
+            the respective host name in your local hosts file (for Windows systems:
+            <code>&lt;WinDir&gt;\system32\drivers\etc\hosts</code>).
+        <li>If you would like to use the load balanced log on, check if the SAP message server service and its
+            TCP port is defined in the services file. There must be an entry of format <code>"sapms&lt;SID&gt;&nbsp;&lt;portnumber&gt;/tcp"</code>
+            in the services file where <code>&lt;SID&gt;</code> = 3-letter SAP System ID. (In Windows systems the
+            services file is usually stored at <code>&lt;WinDir&gt;\system32\drivers\etc\services</code>)
+    </ul>
+    For more information on the SAP technical infrastructure, network communication and configuration please have a
+    look at SAP Note <a href="https://service.sap.com/sap/support/notes/21151">21151</a>.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Application configuration for Unicode SAP Systems</b>
+</td></tr>
+
+<tr><td>
+    If you would like to do RFC outbound calls from a Unicode SAP System to a JCoServer instance,
+    you have to set the &nbsp;"Unicode"&nbsp; option for your RFC destination in transaction <code>SM59</code>.
+    This option can be found on the Tab "Unicode" or "MDMP & Unicode", section "Communication Type with Target
+    System" (for releases 7.00 and higher), or on the Tab "Special Options", section "Character Width in Target
+    System" (for releases 6.10 to 6.40).<br><br>
+    For RFC outbound calls from a non-Unicode SAP System to a JCoServer instance or for any inbound
+    RFC calls to non-Unicode or Unicode SAP Systems you don't have to do any special configuration tasks.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Tracing mechanisms</b>
+</td></tr>
+
+<tr><td>
+    JCo's tracing mechanism can be turned on by setting the following java environment
+    properties at startup:<br>
+    <br>
+       <code>&nbsp;&nbsp;&nbsp;-Djco.trace_level=N&nbsp;(where 0 &le; N &le; 10 with 10 = most detailed trace)</code><br><br>
+    and optionally<br>
+    <br>
+       <code>&nbsp;&nbsp;&nbsp;-Djco.trace_path=&lt;PATH&gt;</code><br>
+    <br>
+    If a trace path is set, the JCo traces will be written to one or multiple files named
+    <code>JCO&lt;date&gt;_&lt;time&gt;.&lt;n&gt;.trc</code> in the specified <code>PATH</code> directory. Otherwise the JCo
+    traces will be written to the standard output stream (default is an output to the console).<br>
+    The same tracing behavior can be achieved by modifying the program code calling the JCo API
+    <code>JCo.setTrace(int level, String path)</code>.<p>
+
+    The tracing mechanism of the lower RFC layer can be turned on by setting the following java environment property at startup:<br><br>
+    <code>&nbsp;&nbsp;&nbsp;-Djrfc.trace=1</code><br><br>
+    Please note that in this case <i><b>all</b></i> connections will be traced, hence this should be only the last resort.<br><br>
+    The RFC layer trace files are named <code>jco_rfc&lt;processID&gt;_&lt;threadID&gt;.&lt;n&gt;.trc</code>
+    and will be written to the current working directory, or to the path that is specified by <code>jco.trace_path</code>.
+    If you would like to trace particular RFC connections only, you can turn on the RFC layer tracing specifically by setting
+    <code>jco.client.trace=1</code> in the appropriate <code>JCoDestination</code> or <code>jco.server.trace=1</code> in the
+    appropriate <code>JCoServer</code> configuration properties.<br><br>
+    The RFC error log file <code>dev_jco_rfc.trc</code> that can be found in the same directory is created independently from
+    any trace setting. RFC errors will always be logged in this file.
+</td></tr>
+
+<TR><TD>
+<hr>
+</TD></TR>
+<TR><TD>
+<i>Copyright &#169; 2008-2016 SAP SE. All Rights Reserved.</i>
+</TD></TR>
+</BODY>
+</HTML>

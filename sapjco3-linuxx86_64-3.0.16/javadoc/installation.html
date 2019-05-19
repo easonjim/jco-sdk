@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<HTML>
+<HEAD>
+
+<TITLE>
+SAP Java Connector 3.0 Installation
+</TITLE>
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="./sap.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="SAP Java Connector 3.0 Installation";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="800" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="intro.html"><FONT CLASS="NavBarFont1"><B>Home</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Installation</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="useful.html"><FONT CLASS="NavBarFont1"><B>Configuration</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index.html" target="_blank"><FONT CLASS="NavBarFont1"><B>API Documentation</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="examples.html"><FONT CLASS="NavBarFont1"><B>Examples</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="releasenotes.html"><FONT CLASS="NavBarFont1"><B>Release Notes</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN=2 BGCOLOR="white" CLASS="NavBarCell2">&nbsp;</TD>
+</TR>
+
+<TR><TD>
+<HR>
+<CENTER>
+<h1>SAP Java Connector 3.0</h1>
+</CENTER>
+</TD>
+</TR>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>
+    The SAP Java Connector (JCo) 3.0 requires a Java Runtime Environment (JRE) version 1.5, 1.6, 1.7 or 1.8.<br>
+    Please see SAP note <a href="https://service.sap.com/sap/support/notes/1077727">1077727</a> for
+    a current and detailed list of supported platforms and Java runtime environments.
+    The latest version of the SAP Java Connector can be downloaded from the SAP Service Marketplace at
+    <a href="https://service.sap.com/connectors">https://service.sap.com/connectors</a>. There you will
+    also find all available distribution packages for the various supported platforms and processors as
+    well as the JCo 3.0 Documenation and the JCo 2.x-3.0 Migration Guide as PDF files.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Microsoft Windows</b>
+</td></tr>
+
+<tr><td>
+    There are different distribution packages for various JRE versions and hardware processors available:
+    <ul>
+        <li><code>sapjco3-ntintel-3.0.16.zip</code> for a 32-bit JRE running on a 32- or 64-bit AMD or INTEL x86 or a
+        64-bit INTEL Itanium processor
+        <li><code>sapjco3-ntia64-3.0.16.zip</code> for a 64-bit JRE running on a 64-bit INTEL Itanium processor
+        <li><code>sapjco3-ntamd64-3.0.16.zip</code> for a 64-bit JRE running on a 64-bit AMD or INTEL x86 processor
+    </ul>
+    <i>Note:</i> Before installing JCo, please install the latest Microsoft Visual Studio 2005 C/C++ runtime libraries
+    as described in note <a href="https://service.sap.com/sap/support/notes/684106">684106</a>.<p>
+    <p>
+    To install JCo for Windows unzip the appropriate distribution package into an own arbitrary directory
+    {sapjco3-path}.<br>
+    <p>
+    <i>Note:</i> Do not copy the <code>sapjco3.dll</code> neither into the <code>{windows-dir}\system32</code>
+    nor into the <code>{windows-dir}\SysWOW64</code> directory. This will break the operability of other JCo versions
+    that are already installed on the same system. Furthermore you would risk that the current installation also would
+    not work anymore, if the <code>sapjco3.dll</code> gets replaced in the respective Windows system directory in the
+    future.
+    <p>
+    Then add <code>{sapjco3-path}</code> to the <code>PATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}\sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Linux</b>
+</td></tr>
+
+<tr><td>
+    There are different distribution packages for various JRE versions and hardware processors available:
+    <ul>
+        <li><code>sapjco3-linuxintel-3.0.16.tgz</code> for a 32-bit JRE running on a 32- or 64-bit AMD or INTEL x86 processor
+        <li><code>sapjco3-linuxia64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit INTEL Itanium processor
+        <li><code>sapjco3-linuxx86_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit AMD or INTEL x86 processor
+        <li><code>sapjco3-linuxppc64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit IBM Power PC Big Endian processor
+        <li><code>sapjco3-linuxppc64le-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit IBM Power PC Little Endian processor
+        <li><code>sapjco3-linuxs390x-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit IBM eServer zSeries processor
+    </ul>
+    To install JCo for Linux copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar zxvf sapjco3-linux*3.0.16.tgz&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    Then add <code>{sapjco3-path}</code> to the <code>LD_LIBRARY_PATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>IBM AIX</b>
+</td></tr>
+
+<tr><td>
+    The following distribution package is available:
+    <ul>
+        <li><code>sapjco3-rs6000_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit IBM RS/6000 processor
+    </ul>
+    To install JCo for IBM AIX copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;gunzip sapjco3-rs6000*3.0.16.tgz&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar xvf sapjco3-rs6000*3.0.16.tar&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    Then add <code>{sapjco3-path}</code> to the <code>LIBPATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>IBM i</b>
+</td></tr>
+
+<tr><td>
+    The following distribution package is available:
+    <ul>
+        <li><code>sapjco3-as400_pase_64-3.0.16.tar</code> for a 64-bit JRE running on a 64-bit IBM i system
+    </ul>
+    To install JCo for IBM i copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, open a QP2TERM session and change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar -xvf sapjco3-as400_pase_64-3.0.16.tar&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+	Then add some environment variables as described in note <a href="https://service.sap.com/sap/support/notes/1269638">1269638</a>
+	according to the used JVM.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>IBM z/OS</b>
+</td></tr>
+
+<tr><td>
+    The following distribution package is available:
+    <ul>
+        <li><code>sapjco3-os390_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit PPC processor
+    </ul>
+    To install JCo for IBM z/OS copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;gunzip sapjco3-os390*3.0.16.tgz&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar xvf sapjco3-os390*3.0.16.tar&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+    <p>After the installation you should tag all examples and documentation files being ASCII: <br>
+    Change to the examples directory and execute<br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;chtag -tc ISO8859-1 *.java&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    Change to the docs directory and execute<br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;chtag -R -tc ISO8859-1 *.html&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>HP-UX</b>
+</td></tr>
+
+<tr><td>
+    There are different distribution packages for various hardware processors available:
+    <ul>
+        <li><code>sapjco3-hp_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit PA-RISC processor
+        <li><code>sapjco3-hpia64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit INTEL Itanium processor
+    </ul>
+    To install JCo for HP copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;gunzip sapjco3-hp*3.0.16.tgz&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar xvf sapjco3-hp*3.0.16.tar&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    Then add <code>{sapjco3-path}</code> to the <code>SHLIB_PATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Oracle Solaris (Sun OS)</b>
+</td></tr>
+
+<tr><td>
+    There are different distribution packages for various hardware processors available:
+    <ul>
+        <li><code>sapjco3-sun_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit SUN SPARC processor
+        <li><code>sapjco3-sunx86_64-3.0.16.tgz</code> for a 64-bit JRE running on a 64-bit AMD or INTEL x86 processor
+    </ul>
+    To install JCo for SUN Solaris copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;gunzip sapjco3-sun*3.0.16.tgz&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;tar xvf sapjco3-sun*3.0.16.tar&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    Then add <code>{sapjco3-path}</code> to the <code>LD_LIBRARY_PATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td>
+<b>Apple Mac OS X</b>
+</td></tr>
+
+<tr><td>
+    There are different distribution packages for various JRE versions and hardware processors available:
+    <ul>
+        <li><code>sapjco3-darwinintel-3.0.16.zip</code> for a 32-bit JRE running on a 32- or 64-bit AMD or
+        INTEL x86 processor
+        <li><code>sapjco3-darwinintel64-3.0.16.zip</code> for a 64-bit JRE running on a 64-bit AMD or INTEL x86 processor
+    </ul>
+    To install JCo for Apple Mac copy the appropriate distribution package into an own arbitrary directory
+    <code>{sapjco3-path}</code>. Next, change to the installation directory:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;cd {sapjco3-path}&nbsp;&nbsp;&nbsp;</code><i>[return]</i><p>
+    and extract the archive:<p>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;unzip sapjco3-darwin*3.0.16.zip&nbsp;&nbsp;&nbsp;</code><i>[return]</i><br>
+    Then add <code>{sapjco3-path}</code> to the <code>DYLD_LIBRARY_PATH</code> environment variable.<br>
+    Finally, add <code>{sapjco3-path}/sapjco3.jar</code> to your <code>CLASSPATH</code> environment variable.
+</td></tr>
+
+<TR>
+<TD>
+<hr>
+</TD>
+</TR>
+<TR>
+<TD>
+<i>Copyright &#169; 2008-2016 SAP SE. All Rights Reserved.</i>
+</TD>
+</TR>
+</BODY>
+</HTML>

@@ -1,0 +1,178 @@
+
+
+body {
+    font-family:tahoma,arial,helvetica,sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    text-decoration:none;
+    color:#000000;
+    background-color:#ffffff;
+    font-size:0.75em;
+    line-height:130%; 
+    margin-left:10px;
+    margin-right:20px;
+    margin-top:20px;
+    scrollbar-3dlight-color:#306898;
+    scrollbar-arrow-color:#306898;
+    scrollbar-base-color:#E8F1F8;
+    scrollbar-darkshadow-color:#E8F1F8;
+    scrollbar-face-color:#E8F1F8;
+    scrollbar-highlight-color:#FFFFFF;
+    scrollbar-shadow-color:#306898;
+    scrollbar-track-color:#E8F1F8;
+}
+
+pre,code {font-family:Courier,mono;font-size:1em;}
+
+p,P,br,BR{
+	color:#000000;
+        margin-bottom:1em;
+        margin-top:0.1em;
+}
+
+
+
+
+
+p.small {font-size:x-small;color:#000000;}
+
+.unlinked {font-size:x-small;font-weight:bold;color:#ffffff;}
+.spacer {line-height:15px;}
+
+	
+h1    { font-size:2.2em; font-weight:bold; color:#225A8D; margin-bottom:0.2em;}
+h2,h3 { font-size:1.6em; font-weight:bold; color:#225A8D; margin-bottom:0.1em;}
+h4    { font-size:1.4em; font-weight:bold; color:#225A8D; margin-bottom:0.1em;}
+hr    { font-size:40px; color:#777777;text-align:left; }
+
+/* faq-specific formatting from kw */
+.answers {  
+font-size:12px; 
+font-variant:normal; 
+color:#000000; 
+text-align:left;  
+vertical-align:top; 
+padding-bottom:10px;  
+padding-top:5px;  
+padding-left:10px;  
+margin-top:5px;  
+margin-bottom:5px;  
+padding-right:5px; 
+}
+
+ol,ul {line-height:160%;padding-left:2.5em;margin-left:0px;margin-top:4px;margin-bottom:10px;}
+ul {list-style-type:square;}
+li {padding-left:0px;margin-left:0px;}
+
+img.top {
+	height:15px;
+	width:20px;
+	border:0px none;	
+}
+img.printer {
+	height:32px;
+	width:34px;
+	border:0px none;	
+}
+TABLE.faq {
+	border:0px;
+	margin:0px;
+	padding:0px;	
+	width:98%;
+}
+TABLE.question {
+	border:1px double #666666;
+	margin-bottom:0px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;		
+	width:100%;
+	background-color:#ffffcc;
+	padding:0px 0px 0px 0px;
+}
+TABLE.theme {
+	border:0px;
+	margin-bottom:30px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	padding:0px;
+	width:100%;	
+}
+TABLE.answer {
+	border:1px double #666666;
+	margin-bottom:10px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+	background-color:#ff9933;
+	padding:0px;	
+	width:100%;
+}
+
+td.white {font-size:9pt;color:#000000;background:#ffffff;}
+td.nav {background:#003366;}
+td.orange {background:#ff9933;color:#555555;}
+td.blue {font-size:11pt;
+	 font-weight:bold;
+ 	 color:#555555;
+	 background:#ccccff;
+	 line-height:20px;}
+td.yellow {font-size:10pt;
+           color:#555555;
+           background:#ffffcc;
+           border:1px double #666666;}
+	
+td.gray {font-size:10pt;
+         color:#555555;
+         background:#cccccc;
+         border:1px double #666666;}
+
+
+TABLE,table
+{ 
+   border:none;
+}
+
+
+td,TD {
+       color:#000000;
+       border-style:solid;
+       border-width:1px;    
+       border-color:#ffffff; 
+      }
+
+
+.TableHeadingColor     {background:#dddddd;} /* orange */
+.TableSubHeadingColor  {background:#aaaaaa} /* pale yellow */
+.TableRowColor         {background:#eeeeee } /* White */
+
+.FrameTitleFont   {font-size:1.6em;color:#777777;  }
+.FrameHeadingFont {font-size:1.6em;font-weight:bold;color:#225A8D; }
+.FrameItemFont    {  }
+
+.NavBarCell1    { background-color:#B5CBE7;border:none;}
+.NavBarFont1    { color:#004990;}
+.NavBarCell1Rev { background-color:#225A8D;border:none;color:#FFFFFF;}
+.NavBarFont1Rev { color:#FFFFFF;}
+
+.NavBarCell2    { background-color:#B5CBE7;border:none;}
+.NavBarCell3    { background-color:#B5CBE7;border:none;}
+
+a:link{color:#225A8D;} 
+a:visited{color:#756183;}
+a:hover{color:#4B8BC7;}
+a:active{color:#FF9A00;}
+
+a.white {font-size:9pt; 
+	font-weight:bold;
+	color:#ffffff;}
+	
+a.white:hover {font-size:9pt; 
+	font-weight:bold;
+	color:#ffffff;
+	text-decoration:underline;}
+
+dl { line-height:160%;margin-left:0px;margin-top:4px;margin-bottom:10px; }
+dt { font-weight:bold }
+tt { font-family:Courier,mono }

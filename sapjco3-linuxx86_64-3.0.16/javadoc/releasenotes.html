@@ -1,0 +1,1511 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<HTML>
+<HEAD>
+
+<TITLE>
+SAP Java Connector 3.0 Release notes
+</TITLE>
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="./sap.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="SAP Java Connector 3.0 Release Notes";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="800" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="intro.html"><FONT CLASS="NavBarFont1"><B>Home</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="installation.html"><FONT CLASS="NavBarFont1"><B>Installation</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="useful.html"><FONT CLASS="NavBarFont1"><B>Configuration</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="index.html" target="_blank"><FONT CLASS="NavBarFont1"><B>API Documentation</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="examples.html"><FONT CLASS="NavBarFont1"><B>Examples</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1Rev">    &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Release Notes</B></FONT>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+</TR>
+
+<TR>
+<TD COLSPAN=2 BGCOLOR="white" CLASS="NavBarCell2">&nbsp;</TD>
+</TR>
+
+<TR><TD>
+<HR>
+<CENTER>
+<H1>SAP Java Connector 3.0</H1>
+</CENTER>
+</TD>
+</TR>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.16</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for IOException when using bgRFC units</b></td></tr>
+<tr><td>
+A <code>java.io.IOException</code> with detail message <code>"CS error: -81"</code> was thrown at invoking
+the method <code>JCoFunctionUnit.commit(JCoDestination)</code> or <code>JCoRequestUnit.commit(JCoDestination)</code>.
+The <code>IOException</code> only occurred after 498 bgRFC units had already been processed successfully.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for using a different repository user in conjunction with SNC</b></td></tr>
+<tr><td>
+When using the SNC Single Sign On (SSO) mechanism, a specifically configured different repository user and password
+via the properties <code>jco.destination.repository.user</code> and <code>jco.destination.repository.passwd</code>
+were ignored and the application user identity of the respective <code>JCoDestination</code> configuration was
+erroneously also used for repository RFC meta data queries to the AS ABAP back-end.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for working with JCoRepository instances in roundtrip optimization mode</b></td></tr>
+<tr><td>
+A <code>java.lang.NullPointerException</code> might have occurred if using a <code>JCoRepository</code> instance in
+roundtrip optimization mode (i.e. the middleware property <code>jco.use_repository_roundtrip_optimization</code>
+was set to <code>1</code> at its creation time). The <code>NullPointerException</code> was either thrown
+when trying to execute a <code>JCoFunction</code> object which has been created by such a repository instance or
+even earlier when querying the meta data for a <code>JCoFunction</code>, <code>JCoFunctionTemplate</code> or a
+<code>JCoRecordMetaData</code> object from an AS ABAP back-end system. Only certain complex data structures and
+table parameter definitions were affected by this bug.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for starting a SAP GUI via a NAT router</b></td></tr>
+<tr><td>
+When opening an RFC connection with using a SAP GUI by specifying the optional logon parameter
+<code>jco.client.use_sapgui</code> to be of value <code>1</code> or <code>2</code>, the SAP GUI failed to start
+and could not be attached to the new RFC connection if some network address translation (NAT) was done on the route
+between the JCo program and the target AS ABAP system.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoDestinationMonitor.getDestinationName()
+    <li>JCoServerMonitor.getServerName()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.15</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for the platform Linux on IBM Power PC 64-bit LE</b></td></tr>
+<tr><td>
+Linux operating systems running on IBM Power PC 64-bit Little Endian processors are supported now. Appropriate JCo
+SDK and runtime installation archives for this new platform are available for download as of JCo 3.0.15.<br>
+Please see SAP note <a href="https://service.sap.com/sap/support/notes/1077727">1077727</a> for a complete and
+detailed list of supported platforms and Java runtime environments.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoAttributes.getSystemID() and JCoServer multiple repository mapping</b></td></tr>
+<tr><td>
+The method <code>JCoAttributes.getSystemID()</code> which was called on an RFC attributes object retrieved by
+invoking <code>JCoServerContextInfo.getConnectionAttributes()</code> in an RFC server scenario might have returned
+a wrong system ID (SID) if the relevant <code>JCoServer</code> was used in a mixed scenario with receiving
+RFC requests from both: SAP ABAP systems and external non-ABAP RFC client programs. As a consequence this then also
+resulted in the wrong <code>JCoRepository</code> instance being used when the <code>JCoServer</code> was configured
+to use the multiple repositories feature (configured with property <code>jco.server.repository_map</code>).
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoAttributes.getSystemNumber()</b></td></tr>
+<tr><td>
+The method <code>JCoAttributes.getSystemNumber()</code> might have returned a wrong system number if the
+destination that provided the <code>JCoAttributes</code> instance was configured for logon load balancing
+and was running in a stateful context.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfixes in method JCoRepository.load()</b></td></tr>
+<tr><td>
+Nested deep structures and also tables with a single field vector of a predefined datatype were not correctly loaded
+into a <code>JCoRepository</code> instance. The respectively constructed and cached JCo meta data objects contained
+internal errors so that their usage in a remote function call lead to a <code>java.lang.ArrayIndexOutOfBoundsException</code>
+or a <code>java.lang.NullPointerException</code>.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfixes in method JCoRepository.save()</b></td></tr>
+<tr><td>
+The cached meta data of a <code>JCoRepository</code> instance was not completely stored at calling method
+<code>JCoRepository.save()</code>. Some nested deep structure meta data objects could have been skipped and were
+not serialized into the JSON format stream. Hence, a <code>JCoRepository</code> loaded from this serialized JSON
+data was lacking required meta data and needed to query this meta data again via remote function calls.<br>
+Furthermore the nesting type information for complex deep structures and the ABAP type information for structure
+type table parameters were incorrectly stored. Although these values could have been wrong, this particular error
+did not have a negative impact at runtime.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for communication with R/3 systems of release 4.0A and 4.0B</b></td></tr>
+<tr><td>
+RFC communication with legacy R/3 systems of release 4.0A and 4.0B did not work anymore and an ABAP runtime error
+of type <code>CALL_FUNCTION_WRONG_VERSION</code> occurred when trying to execute a remote function module in such
+an R/3 system. At the JCo RFC client side a <code>JCoException</code> with error group <code>JCO_ERROR_SYSTEM_FAILURE</code>
+and error message text <code>"RFC log version &amp;1 not supported"</code> was thrown.<br>
+<em>Note:</em> This bug was present in JCo release 3.0.14 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement with automatically obfuscating passwords</b></td></tr>
+<tr><td>
+The default file storage based <code>DestinationDataProvider</code> of the JCo runtime has been enhanced with a new
+feature for automatically obfuscating passwords in its managed <code>&lt;DestinationName&gt;.jcoDestination</code>
+property files, provided that the JCo process has write permission for the respective directory.<br>
+<em><b>Caution:</b></em> Although obfuscated passwords provide better security than plain text passwords, they must
+be regarded as being generally insecure nevertheless. For security reasons it is still strongly recommended to
+register an own <code>DestinationDataProvider</code> instance in productive environments that stores destination
+configurations in a secure persistent layer and uses a proven secure encryption algorithm, especially for the user
+logon credentials.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new enum constants have been added and are available for general use:
+<code>
+<ul>
+    <li>DataProviderException.Reason.IO_ERROR
+    <li>DataProviderException.Reason.SECURITY_ERROR
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.14</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in internal connection pool management for recovering from pool exhaustions</b></td></tr>
+<tr><td>
+Sometimes an internally managed connection pool did not recover from a pool exhaustion situation and permanently
+threw a <code>JCoException</code> with error group <code>JCO_ERROR_RESOURCE</code> when trying to execute a remote
+function module. This error situation could only have occurred if the respectively used destination was <em>not</em>
+configured with the property <code>jco.destination.max_get_client_time</code> set to <code>0</code> and furthermore
+regular pool exhaustion exceptions for this destination already occurred before.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement for improving the network stability during long running RFC client calls</b></td></tr>
+<tr><td>
+JCo now sends CPIC keep alive pings in regular time intervals to the SAP gateway during long running RFC client
+calls in order to prevent firewalls and other network devices from closing the used underlying TCP/IP socket after
+some low level network connection idle timeout, although the respective RFC call is still being executed and
+processed at the target AS ABAP back-end system. Additionally, this new CPIC keep alive ping feature also helps
+with promptly detecting network errors and the loss of the RFC communication partner, so that an appropriate
+<code>JCoException</code> with error group <code>JCO_ERROR_COMMUNICATION</code> can be thrown in such cases.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for native crash in message server service layer</b></td></tr>
+<tr><td>
+A native crash could have occurred when doing a load balanced logon via the SAP message server.<br>
+Please see SAP note <a href="https://service.sap.com/sap/support/notes/2079142">2079142</a> for further details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for usage of the RFC protocol's basXML serialization with NetWeaver AS ABAP 7.02 (7.0 EhP 2) systems</b></td></tr>
+<tr><td>
+The RFC protocol's basXML serialization was not considered and not used when communicating with an AS ABAP system
+of release 7.02. If a function module is flagged to support basXML in an AS ABAP system release 7.02, JCo is now
+using this flag in an associated <code>JCoRepository</code> for the queried <code>JCoFunctionTemplate</code> from
+that system. Furthermore, the runtime is now adhering the flag when communicating with 7.02 AS ABAP systems, thus
+improving performance when exchanging large data in parameters belonging to an import, export, or changing
+parameter list.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for querying meta data from a JCoRepository in roundtrip optimization mode</b></td></tr>
+<tr><td>
+A <code>JCoRepository</code> instance in roundtrip optimization mode (i.e. the middleware property
+<code>jco.use_repository_roundtrip_optimization</code> was set to <code>1</code> at its creation time) could have
+returned incomplete meta data for nested structures, e.g. if a structure contains nested structured elements like
+tables only. As the meta data was not initialized completely, the <code>JCoStructure</code> instances being created
+from it did not contain the nested <code>JCoTable</code> instances.<br>
+At runtime this could have led to a <code>NullPointerException</code> being thrown with a call stack as follows:
+<pre>
+java.lang.NullPointerException: while trying to invoke the method com.sap.conn.jco.rt.DefaultTable.clear() of
+a null object returned from com.sap.conn.jco.rt.AbstractRecord.getTable(int)
+    at com.sap.conn.jco.rt.AbstractRecord.clear()
+    at com.sap.conn.jco.rt.XRfcParser.&lt;init&gt;()
+    at com.sap.conn.jco.rt.ComplexParameter.receiveXmlDataStarted()
+    at com.sap.conn.rfc.engine.RfcImp.receiveXMLData()
+    at com.sap.conn.rfc.engine.RfcGet.ab_rfcget()
+    at com.sap.conn.rfc.engine.RfcRcv.ab_rfcreceive()
+    at com.sap.conn.rfc.engine.RfcIoOpenCntl.RfcReceive()
+    at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcClient.execute()
+    ...
+</pre>
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new API and constant have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoFunction.clone()
+    <li>ServerDataProvider.JCO_APPLICATION
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.13</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for native crash in JCoServer communication with SNC</b></td></tr>
+<tr><td>
+A native crash could have occurred when receiving an RFC request from ABAP to Java that was
+secured with SNC (Secure Network Communication).<br>
+Please see SAP note <a href="https://service.sap.com/sap/support/notes/2156181">2156181</a> for further details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement with invalidating the internal DNS cache</b></td></tr>
+<tr><td>
+IP addresses, resolved host names, network services and resolved port numbers from the DNS (Domain Name System)
+are internally cached by JCo in order to speed up the network performance. However, this behavior prevents to
+set up DNS failover or DNS load balancing scenarios. And if the network configuration is changed, a restart of
+the whole JCo process is required in order to clear the local DNS cache and to work with the changed TCP/IP
+configuration again.<br>
+So the JCo has been enhanced and its internal local DNS cache can now be configured to invalidate and remove
+the DNS cache contents in regular time intervals. Two new JCo properties are now available for this:
+<code>jco.ni.dnscache.ttl</code> and <code>jco.ni.dnscache.negative.ttl</code>. These properties can be set as
+JVM startup parameters by using the <code>-D</code> JVM option and can also be modified during runtime via
+API call. The properties define the time to live for DNS cache entries in seconds.<br>
+Please see the API documentation at method <code>JCo.setProperty(String key, String value)</code> for further
+details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Performance improvement with handling DATE and TIME fields</b></td></tr>
+<tr><td>
+The performance in multi-threaded usage scenarios with handling numerous <code>DATE</code> and <code>TIME</code>
+fields has been improved significantly.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.12</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for hanging JCoServer connections</b></td></tr>
+<tr><td>
+If an RFC request was immediately sent to a just registered <code>JCoServer</code> RFC connection, this newly
+registered RFC server connection could have get into an unrecoverable hanging situation before the incoming
+RFC request could have been dispatched and processed. At the communication partner side the RFC request did
+not return and the active RFC connection kept hanging in status 'connected'.<br>
+<em>Note:</em> This bug was present since JCo release 3.0.10 and was not completely fixed with JCo release 3.0.11.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improvement for detecting network errors at sending CPIC pings</b></td></tr>
+<tr><td>
+Network errors were not detected when sending CPIC keep alive pings for registered <code>JCoServer</code>
+connections. The mechanism was only useful for avoiding that TCP/IP connections are getting closed by
+some network hardware, routers, firewalls or other proxies because of network connection idle timeouts.
+Now also network errors will be recognized by this mechanism so that hanging <code>JCoServer</code>
+connections can be avoided in case of detectable network errors as well. Please see SAP note
+<a href="https://service.sap.com/sap/support/notes/2079312">2079312</a> for further details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for missing Unicode metadata in JCoRepository</b></td></tr>
+<tr><td>
+If the initialization of a new <code>JCoRepository</code> object failed for whatever reason, e.g. because an
+<code>RFC_ERROR_COMMUNICATION</code> occurred at opening the first RFC connection to the associated AS ABAP
+system, this <code>JCoRepository</code> instance did never query and store Unicode RFC metadata in its cache.
+This resulted in a follow-up error with an internal <code>java.lang.ArrayIndexOutOfBoundsException</code> to
+be thrown when executing a remote function call due to the missing metadata.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoRepository instance management</b></td></tr>
+<tr><td>
+Under special circumstances a <code>JCoRepository</code> instance was sometimes dropped and removed from the
+JCo runtime's central repository storage when a related destination configuration was deleted from the
+<code>JCoDestinationManager</code>. In this case all the RFC metadata that was cached within the dropped
+<code>JCoRepository</code> instance was lost and - if needed again - had to be queried from the associated
+SAP system once again, which usually is a very time consuming task.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoAttributes.getPartnerHost()</b></td></tr>
+<tr><td>
+The method <code>JCoAttributes.getPartnerHost()</code> might have returned a wrong partner host name if the
+destination that provided the <code>JCoAttributes</code> instance was configured for logon load balancing
+and was running in a stateful context.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for configuration exceptions in extern-to-extern client communication scenarios</b></td></tr>
+<tr><td>
+When using a destination instance that targets an external RFC server program, a call to method <code>JCoFunction.execute(destination, ...)</code>
+always threw a <code>JCoException</code> with error group <code>JCO_ERROR_CONFIGURATION</code>, if the
+destination was not configured with a valid <code>'jco.destination.repository_destination'</code> property.
+However, no repository is needed at this time for executing a remote function call in an external RFC server
+program. Hence, throwing a <code>JCoException</code> with error group <code>JCO_ERROR_CONFIGURATION</code>
+was not justified in this calling context.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of stateful extern-to-extern RFC client communication with started RFC server programs</b></td></tr>
+<tr><td>
+Support for stateful extern-to-extern RFC client communication with started RFC server programs has been
+added. It is now possible to use a stateful call context with <code>JCoContext.begin(destination)</code> and
+<code>JCoContext.end(destination)</code> to destinations that target started external RFC server programs.<br>
+<em>Note:</em> Stateful extern-to-extern RFC client communication with registered RFC server programs still
+remains unsupported.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new constant has been added and is available for general use:
+<code>
+<ul>
+    <li>JCoDestination.BACK
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.11</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for lost scope types when using JCoCustomDestinations</b></td></tr>
+<tr><td>
+Scope types were lost when using <code>JCoCustomDestination</code> instances. Remote function calls via a
+<code>JCoCustomDestination</code> instance were always executed within the default scope type context. In
+case that the current JCo context was stateful, this resulted in the same RFC connection being used for all
+<code>JCoCustomDestination</code> instances and therefore possibly destroyed the integrity of an LUW
+(Logical Unit of Work).<br>
+<em>Note:</em> This bug was present in JCo release 3.0.10 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for hanging JCoServer connections</b></td></tr>
+<tr><td>
+If an RFC request was immediately sent to a just registered <code>JCoServer</code> RFC connection, this newly
+registered RFC server connection could have get into an unrecoverable hanging situation before the incoming
+RFC request could have been dispatched and processed. At the communication partner side the RFC request did
+not return and the active RFC connection kept hanging in status 'connected'.<br>
+<em>Note:</em> This bug was present in JCo release 3.0.10 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in connection pool management at program termination</b></td></tr>
+<tr><td>
+When shutting down the JCo application program, pooled idle and still open RFC connections were not closed
+properly before the application program terminates. This resulted in these pooled RFC connections being
+interrupted instead with getting CPIC error messages<br>
+<code>"Connection to partner '&lt;host&gt;:&lt;port&gt' broken / Connection reset by peer"</code>
+at the RFC communication partner side.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoRepository.save()</b></td></tr>
+<tr><td>
+A <code>java.lang.NullPointerException</code> was thrown when saving a <code>JCoRepository</code> instance
+which contained a remote function module template with an empty import parameter list.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoRepository.load()</b></td></tr>
+<tr><td>
+The meta data information that specifies if a parameter is an optional parameter or not was lost after loading
+a <code>JCoRepository</code> instance from a Java I/O character stream. Calling method
+<code>JCoListMetaData.isOptional(&lt;name|index&gt;)</code> on any parameter meta data that was loaded by a
+<code>JCoRepository</code> always returned <code>false</code> in this case.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in error handling when logging on to non-Unicode ABAP systems</b></td></tr>
+<tr><td>
+A <code>java.lang.NullPointerException</code> was always thrown when trying to logon to a non-Unicode ABAP
+system with using one of the new logon languages that are available in Unicode SAP systems only. Now an
+appropriate <code>JCoException</code> with error group <code>RFC_ERROR_LOGON_FAILURE</code> will be thrown in
+such a scenario instead.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement with transferring the caller program name to the RFC communication partner</b></td></tr>
+<tr><td>
+A caller program name is now sent to the communication partner when opening a new RFC connection. It can be
+retrieved from the RFC attributes at the communication partner side. The caller program name <code>'SAPJCo30'</code>
+is used per default. An arbitrary custom program name can be set by specifying the Java system property
+<code>-Djco.program_name=&lt;ProgramName&gt;</code> as a JVM startup parameter.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improvement at starting JCoServer instances</b></td></tr>
+<tr><td>
+Starting <code>JCoServer</code> instances has been improved with now doing lazy initializations of RFC repository
+destinations and with ignoring and tolerating RFC communication errors at startup.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement at runtime initialization with adding a multi-platform library loading feature</b></td></tr>
+<tr><td>
+The JCo runtime initialization has been enhanced with a multi-platform library loading feature which allows
+to create a central JCo installation that can be started on various operating systems and with using different
+Java Virtual Machines without any configuration change. For example, JCo can now be installed on a single
+central network share and be used from several operating systems like Windows, Linux or Mac OS X simultaneously.
+Or one can work locally with a single JCo installation and use a 32-bit and a 64-bit JVM simultaneously or
+choose one or the other JVM alternately at will.<br>
+For using this feature it is only required to put all desired platform dependent JCo JNI libraries in specifically
+named subdirectories of the directory where the <code>sapjco3.jar</code> file resides,
+e.g. <code>&lt;sapjco3.jar_DIR&gt;\ntamd64\sapjco3.dll</code>, <code>&lt;sapjco3.jar_DIR&gt;\ntintel\sapjco3.dll</code>
+or <code>&lt;sapjco3.jar_DIR&gt;/linuxppc64/libsapjco3.so.</code><br>
+See the <a href="useful.html">Configuration and Requirements</a> documentation chapter "Runtime initialization"
+for further details and the list of valid platform specific subdirectoy names.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoServer.setRepository(JCoDestination)
+    <li>JCoServer.setRepository(String, String, JCoDestination)
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.10</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for hanging JCoServer connections</b></td></tr>
+<tr><td>
+Under certain circumstances RFC connections to a <code>JCoServer</code> could have get into an unrecoverable
+hanging situation. Then RFC requests to a registered <code>JCoServer</code> instance did not return and the
+appropriate RFC connection could not be canceled but kept hanging infinitely in any status, even in status
+'disconnecting'. Please see SAP note <a href="https://service.sap.com/sap/support/notes/1791529">1791529</a>
+for further details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix removing a memory leak in the JCo session management</b></td></tr>
+<tr><td>
+A memory leak was removed within the internal JCo session management. The memory leak occurred after a custom
+<code>SessionReferenceProvider</code> implementation had been registered at the JCo runtime environment. Its
+method <code>SessionReferenceProvider.isSessionAlive(sessionId)</code> was never called which resulted in
+numerous JCo session objects not getting freed although the sessions already had expired.<br>
+<em>Note:</em> This bug was present in JCo release 3.0.9 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Performance bugfix at RFC request dispatching to JCoServers</b></td></tr>
+<tr><td>
+In case of RFC server registrations to some SAP gateway taking a long time for whatever reason (e.g. because the relevant
+SAP AS ABAP system or SAP gateway is currently in shutdown or startup phase, the host itself is not reachable via network
+or due to network performance issues), the whole RFC request dispatching to all running <code>JCoServer</code> instances
+was extremely slow and therefore lead to a performance degradation also of those registered JCo RFC servers and
+related SAP AS ABAP systems who actually were not connected to the problematic SAP gateway host.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of extern-to-extern RFC communication</b></td></tr>
+<tr><td>
+Support for calling external RFC server programs as well as support for receiving RFC requests from external RFC client
+programs has been added.<br>
+For addressing external RFC server programs the property <code>jco.client.tpname</code>, which specifies the appropriate
+registered server program ID, can now be configured for a destination, which then can be used for calling RFC programs
+that are registered at a SAP gateway. Additionally, the property <code>jco.destination.repository_destination</code>
+should be configured and refer to some destination targeting an appropriate SAP AS ABAP system for retrieving
+potentially required RFC meta data.<br>
+Receiving RFC requests from external RFC client programs is not allowed by default for security reasons.
+A <code>JCoException</code> with error group <code>JCoException.JCO_ERROR_SYSTEM_FAILURE</code> will be thrown to both
+RFC communication partners everytime a JCo RFC server receives such an RFC request. For allowing external RFC client
+program calls to be processed by a JCo RFC server an administrator needs to specify the Java system property
+<code><nobr>-Djco.allow_non_abap_partner=1</nobr></code> as a JVM startup parameter to be already available at JCo
+framework initialization time. Please see SAP note <a href="https://service.sap.com/sap/support/notes/1877907">1877907</a>
+for further details.<br>
+<em><b>Caution:</b></em> For security reasons SAP discourages to run such extern-to-extern RFC communication scenarios.
+External or registered RFC server programs are not able to check and authenticate incoming RFC requests from external
+non-ABAP programs with regard to the pure RFC protocol data. Each of such external RFC requests must be regarded as
+insecure.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement with providing support for local repository storages</b></td></tr>
+<tr><td>
+A new feature has been added allowing to save and load a complete <code>JCoRepository</code> instance in JSON format
+to and from standard Java I/O character streams.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for StackOverflowError in JCoRepository</b></td></tr>
+<tr><td>
+Depending on the defined DDIC (Data Dictionary) types and structures and on the defined RFM (Remote Function Module)
+interfaces at SAP AS ABAP system side a <code>java.lang.StackOverflowError</code> could have been thrown when a
+<code>JCoRepository</code> instance was storing the queried RFC meta data into its internal <code>MetaDataStorage</code>
+instance.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for avoiding connection interruptions at long running stateful RFC server requests</b></td></tr>
+<tr><td>
+Long running stateful RFC server requests from ABAP to Java were always interrupted after the configured session timeout
+interval (default is 10 minutes) without checking at the registered <code>SessionReferenceProvider</code> if the session
+would be still alive nevertheless.<br>
+<em>Note:</em> This bug was present in JCo release 3.0.9 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in method JCoServerContextInfo.getCallType()</b></td></tr>
+<tr><td>
+Method <code>JCoServerContextInfo.getCallType()</code> always returned <code>null</code> instead of the current type of
+the incoming RFC request in form of a <code>JCoServerCallType</code> enumeration object.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in RFC attribute handling when communicating with non-Unicode ABAP systems</b></td></tr>
+<tr><td>
+A <code>java.lang.NullPointerException</code> was always thrown from the internal JCo method <code>getAttributes()</code>
+when trying to communicate with a non-Unicode ABAP system that uses an ambiguous blended code page like SAP code page 6110.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for querying structure and record meta data from a JCoRepository in roundtrip optimization mode</b></td></tr>
+<tr><td>
+A <code>JCoRepository</code> instance in roundtrip optimization mode (i.e. the middleware property
+<code>jco.use_repository_roundtrip_optimization</code> was set to <code>1</code> at its creation time) always returned
+<code>null</code> when querying structure or record meta data from an SAP AS ABAP system with methods
+<code>JCoRepository.getStructureDefinition(String name)</code> and <code>JCoRepository.getRecordMetaData(String name)</code>.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix at getting a repository destination ID</b></td></tr>
+<tr><td>
+Under some special circumstances the method <code>JCo.getRepositoryDestinationID(String destinationID)</code> returned
+<code>null</code> indicating that the respective <code>JCoDestination</code> instance for the given <code>destinationID</code>
+has not been used for repository queries yet although this is not true.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoRepository.load(java.io.Reader)
+    <li>JCoRepository.save(java.io.Writer)
+    <li>JCoCustomRepository.addClassMetaDataToCache(JCoClassMetaData)
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Deprecated APIs</b></td></tr>
+<tr><td>
+The following APIs have been declared deprecated and will be removed in a future version of JCo:
+<code>
+<ul>
+    <li>DestinationDataProvider.JCO_USER_ID
+    <li>JCoRepositoryMonitor.getRespositoryDestinationMonitor(String)
+</ul>
+</code>
+The APIs have either become obsolete or there is an equivalent substitution available for them. See the API
+Documentation for details.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.9</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix removing a memory leak in the JCoTimeoutChecker thread</b></td></tr>
+<tr><td>
+A memory leak was removed at the internal destination management within the <code>JCoTimeoutChecker</code> thread. This memory
+leak was created each time that the registered <code>DestinationDataProvider</code> instance updated or deleted a previously
+used destination from its destination configuration repository.<br>
+<em>Note:</em> This bug was present in JCo release 3.0.8 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for CPIC communication error "client with wrong appc header version rejected"</b></td></tr>
+<tr><td>
+A program error in the underlying native CPIC communication software layer has been fixed that sometimes led to RFC connections
+getting broken. In this case a <code>JCoException</code> with error group <code>JCoException.JCO_ERROR_COMMUNICATION</code>
+was thrown and contained the CPIC error message "client with wrong appc header version rejected". Please see SAP note
+<a href="https://service.sap.com/sap/support/notes/1664732">1664732</a> for further information.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for RFC callback handling</b></td></tr>
+<tr><td>
+RFC callbacks to the JCo framework were not handled correctly. Although receiving an RFC callback is not an error by itself,
+there was always an error of type <code>RfcGetException</code> with message "Received a callback from the communication partner"
+logged in the RFC error log file <code>dev_jco_rfc.trc</code>. Despite this log entry, no error or exception was thrown to
+the JCo application or signalled to the communication partner. Even if the requested RFC function module was not available
+and could not be processed, this was not done and the RFC callback was ignored. If the delta management for RFC table parameters
+was active, the erroneous RFC callback handling could furthermore have caused lost table data and table data inconsistencies
+between the two communication partners.<br>
+Now RFC callbacks are handled correctly with throwing a <code>JCoException</code> of error group
+<code>JCoException.JCO_ERROR_SYSTEM_FAILURE</code>, if the requested function module is not available, and only in this case
+an error is logged to the RFC error log file <code>dev_jco_rfc.trc</code>.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for the middleware property 'jrfc.client_connect_timeout' having no effect</b></td></tr>
+<tr><td>
+RFC logon attempts to an SAP ABAP system have not been interrupted if they were running too long and exceeded the time span
+that was specified by the JCo middleware property <code>jrfc.client_connect_timeout</code> (default is 60 seconds). Now a
+<code>JCoException</code> with error group <code>JCoException.JCO_ERROR_TIMEOUT</code> will correctly be thrown in such a
+situation, thus interrupting the currently running RFC logon attempt.<br>
+<em>Note:</em> This bug was present from JCo release 3.0.5 to 3.0.8 only.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for setting the default or an empty value into fields of type XSTRING</b></td></tr>
+<tr><td>
+After calling method <code>JCoRecord.setValue([name|index], null)</code> or
+<code>JCoRecord.setValue([name|index], new byte[0])</code> for setting the default or an empty field value on fields of
+type <code>JCoMetaData.TYPE_XSTRING</code>, the field was not cleared and empty afterwards but contained one 0-byte value,
+i.e. a byte array of length 1 (<code>byte[] = { 0x00 }</code>). This 0-byte value was also sent via RFC to the
+communication partner, if the <code>JCoMetaData.TYPE_XSTRING</code> field was part of an importing, changing or tables
+parameter in a <code>JCoFunction</code> or a <code>JCoRequest</code> object.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for writing JCo traces when using a JCoServerRequestHandler</b></td></tr>
+<tr><td>
+When using the RFC request/response model at the <code>JCoServer</code> side with a <code>JCoServerRequestHandler</code>
+instance processing the incoming RFC requests, JCo neither traced the API calls to the <code>handleRequest(...)</code>
+method invocations nor any meta data or content data of these RFC requests, even if the respective JCo trace level was
+set for writing such information.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improved JCo initialization for recognizing additional Java system properties</b></td></tr>
+<tr><td>
+In addition to setting the properties <code>jco.session_timeout</code> and <code>jco.session_timeout.check_interval</code>
+with the method <code>JCo.setProperty(String key, String value)</code>, these two properties can now also be set as Java
+system properties with the <code>-D</code> argument when starting the JVM and they will be recognized at JCo initialization.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of user/password logon while using SNC</b></td></tr>
+<tr><td>
+With the new destination logon property <code>jco.client.snc_sso</code> it is possible to turn off the Single Sign On (SSO)
+mechanism of SNC by setting it to the value <code>0</code>. Thus, it is possible to log on to an SAP ABAP back-end system
+with some other user ID not fitting to the SNC identity, while SNC can still be used for encrypting the network
+communication. As a prerequisite, a minimum SAP system kernel patch level is required as mentioned in SAP note
+<a href="https://service.sap.com/sap/support/notes/1701870">1701870</a>.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of logon with external user identification data</b></td></tr>
+<tr><td>
+The destination properties <code>jco.client.extid_type</code> and <code>jco.client.extid_data</code> have been added
+for supporting to log on with external user identifaction data to an SAP ABAP back-end system. For this logon variant it is
+mandatory to use SNC.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improved logon procedure for languages available in Unicode SAP systems only</b></td></tr>
+<tr><td>
+Some languages like Armenian, Georgian, Vietnamese, Macedonian and many others are available in Unicode SAP systems only.
+If logging on with such a language to an SAP ABAP back-end system, it was mandatory to specify an additional destination
+property like <code>jco.client.codepage</code> with indicating a unicode communication type, otherwise such logons failed
+with an <code>JCoException.JCO_ERROR_LOGON_FAILURE</code> showing the error message "Select one of the installed languages"
+although the appropriate language was installed.<br>
+This logon procedure has been improved so that it does not require any additional communication code page destination
+property anymore in this case. The unicode communication type is now automatically detected and used for logging on with
+such new SAP system language keys.<br>
+Please see SAP note <a href="https://service.sap.com/sap/support/notes/895560">895560</a> for more details on languages
+that are only available in Unicode SAP systems.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoDestination.getSncSSO()
+    <li>JCoDestination.getExternalIDData()
+    <li>JCoDestination.getExternalIDType()
+    <li>JCoCustomDestination.SncConfigurationData.setSncWithSSO(boolean)
+    <li>JCoCustomDestination.UserData.setExternalIDData(String)
+    <li>JCoCustomDestination.UserData.setExternalIDType(String)
+    <li>JCoDestinationMonitor.getWaitingThreadCount()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.8</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix removing a memory leak in JCo native JNI layer</b></td></tr>
+<tr><td>
+A memory leak in the native layer existed when receiving data from the back-end. Thus, more and more
+native memory was allocated and the process could run out of memory. Please check
+SAP note <a href="https://service.sap.com/sap/support/notes/1595477">1595477</a> for details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix removing a memory leak in JCoRepository</b></td></tr>
+<tr><td>
+Under certain circumstances, a memory leak was caused by the internal destination management within a repository. This
+could have happened when creating many <code>JCoCustomDestination</code> instances from destinations, which did not
+have an associated repository yet. In this situation the first call to <code>JCoCustomDestination.getRepository()</code>
+on each of such a <code>JCoCustomDestination</code> instance created a memory leak in the Java heap being located in the
+returned <code>JCoRepository</code> object.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for connection reset handling against R/3 release 4.6C systems</b></td></tr>
+<tr><td>
+When communicating with an R/3 release 4.6C system which is running with a 4.6D kernel, the reset of pooled connections was
+not working as expected. Instead of simply resetting the context in the back-end, the connection was closed and re-established
+again. In networks with high latency this led to an undesired performance degredation. This was caused by wrongly checking the
+partner release number instead of the kernel release number.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoServer restart mechanism when processing update events</b></td></tr>
+<tr><td>
+When a server had to be restarted due to a change in the configuration being signaled by an update event, the server did not
+come up, but was stopped instead. In particular, simply adjusting the trace flag led to this situation. This was caused
+by the fact, that the new server instance was already started, before the old one had been shutdown completely.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for usage of the destination and server data connection property 'gwserv'</b></td></tr>
+<tr><td>
+If specifying a gateway service with the destination data connection property 'jco.client.gwserv' or with the server data
+connection property 'jco.server.gwserv', all property string values of format sapgw##s (with # being a placeholder for a
+digit) were not accepted and an exception was thrown or an error message was logged saying that the gateway service
+parameter needs to be of a different format. Contrary to this error message, gateway service parameters of format sapgw##s
+are valid and may be specified alternatively to parameter values of format sapgw## or #### for directly specifying the
+TCP port number.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for JCoCustomDestination instances not getting invalidated</b></td></tr>
+<tr><td>
+A <code>JCoCustomDestination</code> instance was never invalidated and remained usable, even if the destination configuration,
+which it is based on, was changed or deleted. Now a <code>JCoException</code> with error group
+<code>JCoException.JCO_ERROR_DESTINATION_DATA_INVALID</code> will correctly be thrown, if a <code>JCoCustomDestination</code>
+instance will be used in such a situation.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for SSO-Tickets and X.509-Certificates not being used with JCoCustomDestination</b></td></tr>
+<tr><td>
+New SSO-Tickets or X.509-Certificates that are set for a <code>JCoCustomDestination</code> instance were not used, in case
+that there was already another SSO-Ticket or X.509-Certificate previously being used for this destination. The previously
+set SSO-Ticket or X.509-Certificate was cached and still used instead of the new one. This led to a <code>JCoException</code>
+with error group <code>JCoException.JCO_ERROR_LOGON_FAILURE</code> being thrown, if the SSO-Ticket or X.509-Certificate
+has been expired in the meantime.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for wrong repository destination being used with JCoCustomDestination</b></td></tr>
+<tr><td>
+After setting a repository destination with method <code>JCoCustomDestination.setRepositoryDestination(JCoDestination)</code>,
+the <code>JCoCustomDestination</code> instance used the passed destination's client connections instead of the desired
+repository connections. Depending on the destination configuration this might have led to a wrong repository being
+returned on a subsequent call to <code>JCoCustomDestination.getRepository()</code> and/or wrong targeted connections
+and logon parameters being used for future meta data queries of the returned <code>JCoRepository</code> instance.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improved JCoCustomRepository destination setting</b></td></tr>
+<tr><td>
+The setting of a destination for a <code>JCoCustomRepository</code> instance has been improved. Now it is possible to change
+the destination for remote meta data queries with method <code>JCoCustomRepository.setDestination(JCoDestination)</code>.
+Before this improvement, it was only allowed to set a destination once and subsequent calls to
+<code>JCoCustomRepository.setDestination(JCoDestination)</code> led to a <code>JCoRuntimeException</code> with error group
+<code>JCoException.JCO_ERROR_ILLEGAL_STATE</code> being thrown.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix at creation of JCoDestinationMonitor objects</b></td></tr>
+<tr><td>
+The method <code>JCoDestination.getMonitor()</code> threw a <code>JCoRuntimeException</code> with error group
+<code>JCoException.JCO_ERROR_RESOURCE</code> saying that the destination would not be initialized or would have been already
+removed, although this was not true and the <code>JCoDestination</code> instance was actually valid. This error situation
+only occurred if the <code>JCoDestination</code> instance's <code>getMonitor()</code> method was called for the first time
+and there was no connection pool available for this destination at that time.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoDestinationMonitor returning wrong data</b></td></tr>
+<tr><td>
+<code>JCoDestinationMonitor</code> instances returned wrong data after the connection pool being associated to the monitored
+<code>JCoDestination</code> instance was temporarily removed due to inactivity on this destination. In such an error
+situation the <code>JCoDestinationMonitor</code> instance always reported that there would not be any open connection and
+consequently the number of pooled and used connections would both be <code>0</code>. But that potentially did not reflect
+the real situation where several new connections for the monitored destination meanwhile might have been opened again.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New API</b></td></tr>
+<tr><td>
+The following new API has been added and is available for general use:
+<code>
+<ul>
+    <li>JCoDestinationMonitor.isValid()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for creation of JCoRepository objects</b></td></tr>
+<tr><td>
+The method <code>JCoDestination.getRepository()</code> threw a <code>JCoRuntimeException</code> with error group
+<code>JCoException.JCO_ERROR_CONFIGURATION</code> saying that the configuration for this destination would be invalid
+in case there was a repository user defined, but no standard user, user alias or logon ticket were configured. Contrary
+to this error message, a destination configuration containing only a repository user is sufficient at least for the
+creation of and usage by a <code>JCoRepository</code> instance.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improved default behavior with connection pooling</b></td></tr>
+<tr><td>
+The default behavior regarding the connection pooling has been improved. If the <code>DestinationDataProvider</code>
+does not specify the property <code>jco.destination.pool_capacity</code> for a certain destination, the default value
+<code>1</code> is used for this property now instead of <code>0</code>. This means that connection pooling is enabled
+by default now and thus dramatically increases the performance of typical single threaded applications who do not care
+about connection pooling.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.7</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for scope types in the default implementation of the session reference provider</b></td></tr>
+<tr><td>
+The default implementation of the SessionReferenceProvider was re-implemented as DefaultSessionReferenceProvider and is now exposed in
+com.sap.conn.jco.ext package and supports scopeTypes by default. If an application/infrastructure that uses the default implementation wants
+to disable scopeType support again it has to register new DefaultSessionReferenceProvider(false) via the Environment class.
+<br/>Find more details in the JavaDoc.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Deprecations</b></td></tr>
+<tr><td>
+Some methods in the <code>JCoDestinationManager</code>, the <code>JCoServerFactory</code>, and <code>JCo</code>
+have been deprecated. Adjust your coding accordingly so that you don't run into trouble, if those methods are
+removed from the public API in future versions of JCo.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoMetaData.setName(String)
+    <li>JCoRecordMetaData.setLineType(String)
+    <li>JCoRecord.write(int, Writer)
+    <li>JCoRecord.write(String, Writer)
+    <li>JCoDestination.isValid()
+    <li>JCoServer.isValid()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in SimpleSessionReferenceProvider</b></td></tr>
+<tr><td>
+Under high load, an exception could occur signalling a concurrent modification within an internal HashMap. The exception
+callstack could look like as follows:
+<pre>
+java.util.ConcurrentModificationException
+    at java.util.HashMap$AbstractMapIterator.checkConcurrentMod()
+    at java.util.HashMap$AbstractMapIterator.makeNext()
+    at java.util.HashMap$KeyIterator.next()
+    at java.util.HashMap.analyzeMap()
+    at java.util.HashMap.rehash()
+    at java.util.HashMap.rehash()
+    at java.util.HashMap.putImpl()
+    at java.util.HashMap.put()
+    at com.sap.conn.jco.rt.SimpleSessionRefProvider.jcoServerSessionPassivated()
+    at com.sap.conn.jco.rt.DefaultServerWorker.callFinishedInternal()
+    ...
+</pre>
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoRepository with regard to destination handling</b></td></tr>
+<tr><td>
+A repository is shared between several destinations that all establish own connections to the
+ABAP system. The destination that is actually used for the lookup causes a <code>JCoException</code> with group
+<code>JCoException.JCO_ERROR_LOGON_FAILURE</code>. This exception is thrown due to an incorrect configured repository
+user/repository password combination or because the user is locked (e.g. due to running out of the validity period).
+Hence, repository queries failed, as repeatedly the &quot;bad&quot; destination is used instead of switching
+to the next valid one, which could be used successfully for the query, even though such a mechanism exists in the repository.
+Moreover, it could happen that a working back-end user used for metadata lookup is locked after several metadata query tries,
+and you will get the message "Password logon no longer possible" when trying to logon with this user.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement: special ThreadGroup for Threads created by JCo</b></td></tr>
+<tr><td>
+When JCo is creating Threads internally (e.g. in a <code>JCoServer</code> without a special <code>JCoServerRunnable</code>
+implementation or for the Timeoutchecker thread), they are now assigned to a dedicated ThreadGroup belonging to JCo. Thus,
+the threads are no longer belonging to random thread groups of the runtime environment, depending on the creation point in
+time of the concrete thread.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement: DataProviderException</b></td></tr>
+<tr><td>
+Now, an implementation of DestinationDataProvider and ServerDataProvider may throw a DataProviderException to
+report an exceptional situation, it encountered while a certain configuration has been requested.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoServer setup</b></td></tr>
+<tr><td>
+When using SNC for a <code>JCoServer</code> and using <code>9</code> as value for
+<code>jco.server.snc_qop</code>, JCo complained wrongly about an invalid value.
+This was due to a wrong range usage, when checking the properties: JCo used [0..8] instead of [1..9].
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoServer transaction and unit processing setup</b></td></tr>
+<tr><td>
+When there is no <code>JCoServerTIDHandler</code> or no <code>JCoServerUnitIDHandler</code> set for a <code>JCoServer</code>,
+and a tRFC/qRFC or bgRFC unit is received by a server, a <code>NullPointerException</code> without descriptive
+message is thrown. If such a handler is missing and a corresponding request shall be processed, JCo now throws a
+a <code>JCoRuntimeException</code> with group <code>JCoException.JCO_ERROR_ILLEGAL_STATE</code> that provides a clarifying message.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoServer called by 3.1I ABAP Server</b></td></tr>
+<tr><td>
+Since JCo 3.0.5, if a 3.1I ABAP System made a request to a JCoServer, it caused an exception with a
+message similar to
+<tt>RFC_ERROR_SYSTEM_FAILURE: You cannot adjust the state of a ServerConnection with this method.</tt>
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for deployment errors</b></td></tr>
+<tr><td>
+Sometimes a JCo standalone was deployed accidentally into a NetWeaver AS Java. This could lead to strange
+error situations that were randomly occuring. Hence, JCo standalone is now denying to be loaded within
+a NetWeaver AS Java. If JCo should be used within that environment, the embedded JCo variant should be
+used (can be referred to as tc/bl/jco/api, an application only needs to set this reference in its
+deployment descriptor).
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for JCoSessionReferenceProvider server event jcoServerSessionFinished()</b></td></tr>
+<tr><td>
+In a stateless server context, the event method <code>jcoServerSessionFinished()</code> received always null as session ID and not
+the expected session ID that was originally provided by the <code>JCoSessionReference</code> returned by <code>jcoServerSessionStarted()</code>.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.6</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Connect failure on load balanced logon under heavy load</b></td></tr>
+<tr><td>
+Caused by a race condition, the JCo runtime could use wrong service if connection was being
+established via the message server, that means using load balanced logon. In such cases,
+JCo throws an exception with the following error text
+<pre>
+    LOCATION    SAP-Gateway on host <host> / sapgwXX
+    ERROR       partner '<host>:sapgwYY' not reached
+</pre>
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Data element names missing in metadata since JCo 3.0.5</b></td></tr>
+<tr><td>
+If in a structure, table or function module a scalar type (e.g. CHAR, NUMC, etc) is refering to a data element,
+the name of that data element is not returned in getRecordTypeName() in JCo 3.0.5, though this worked fine in
+JCo 3.0.0 to 3.0.4.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in JCoRepository</b></td></tr>
+<tr><td>
+If a vector of a domain was looked up directly, it did not contain the linetype, hence was not
+handled like a table type properly.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for JCoCustomDestination</b></td></tr>
+<tr><td>
+A <code>JCoDestination</code> is associated with a scopeType via <code>JCoDestinationManager.getDestination(destName, scopeType)</code>.
+When now creating a <code>JCoCustomDestination</code> from the retrieved destination, the scopeType
+information is ignored, when executing a function module.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement for tracing</b></td></tr>
+<tr><td>
+When tracing at high trace levels and large data volumes, the memory footprint of JCo was
+increasing stronger than necessary leading to <code>OutOfMemoryErrors</code> too early. Now, the
+memory consumption has been reduced and such errors should come up only with even higher data
+volumes.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement for session timout checking</b></td></tr>
+<tr><td>
+It was impossible to adjust JCo session timeout checking independently from the timeout interval.
+This was changed by introducing <code>jco.session_timeout.check_interval</code> that allows specifying a value
+in minutes and defaults to 5.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Roundtrip reduction for repository</b></td></tr>
+<tr><td>
+When JCo is looking up metadata in a back-end for a certain function module, it calls several function modules
+providing metadata for the function and the involved structures. In slow networks, e.g. a VPN connection
+crossing longer distances, this can lead to bad performance in case of design time scenarios, where the
+repository cache is typically not filled and many roundtrips to the back-end are needed.
+SAP note <a href="https://service.sap.com/sap/support/notes/1456826">1456826</a> introduces
+<code>RFC_METADATA_GET</code>, with which the number of roundtrips per function is reduced to 1.
+JCo now uses this function module, if it's available in the back-end and if the JCo property
+<code>jco.use_repository_roundtrip_optimization</code> is set to 1. Please note, that you need
+to adjust authorization profiles for your metadata user in that case.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in XRfcParser</b></td></tr>
+<tr><td>
+When table type FOO has a table type BAR as line type and one of the rows of FOO contains simply an
+empty table BAR, then an expeption occured that looks similar to:
+<i>JCO_ERROR_XML_PARSER: Parameter PARAM_FOO: After a value an end tag must follow. That did not
+happen in "em><item><BAR_COL"</i>.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in initialization of RFC parameter defaults</b></td></tr>
+<tr><td>
+RFC function module parameters might not have been initialized correctly when an ABAP system field
+(e.g. <code>SY-DATLO</code> or <code>SY-TIMLO</code>) was defined as its default value. This also
+might have led to some <code>ConversionException</code> being thrown when trying to read these
+values with the <code>JCoParameterList.getValue()</code> or the various <code>JCoParameterList.get&lt;type&gt;()</code>
+methods.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in server registration</b></td></tr>
+<tr><td>
+If a gateway is protected with a reginfo file, a <code>JCoServer</code> is not allowed
+to register itself from a certain host and/or a certain program ID with that gateway. Unfortunately, the
+<code>JCoServer</code> did not recognize such a registration failure as an unrecoverable configuration error,
+and hence tried to re-register again immediately. This was certainly failing again, which was leading to
+rapidly growing dev_jco_rfc.trc files.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix when degistering DestinationDataProvider</b></td></tr>
+<tr><td>
+When a <code>DestinationDataProvider</code> is deregistered from JCo, the connections established by
+destinations created from this provider should be closed. However, this did not work for repository
+connections. If afterwards the JCo application is terminated, the ABAP system wrote an
+entry containing "SAP-RC=223" into the syslog.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfixes in server configuration processing</b></td></tr>
+<tr><td>
+When processing changes in server configurations signalled by the <code>ServerDataProvider</code>, not all changes were recognized by the <code>JCoServer</code>.
+Even if a change was recognized, and a running server was updated, it was no longer running after that update, but
+was simply stopped. In case of restarts, the setting for the maximum restart delay time was ignored.
+</td></tr>
+
+<tr BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Documentation improved</b></td></tr>
+<tr><td>
+Documentation was added and enhanced at different locations, in particular in the cases mentioned below:
+<ul>
+    <li>Existing JCo properties are now documented
+</ul>
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.5</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New API and constant</b></td></tr>
+<tr><td>
+The following new API and constant have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoCustomDestination.setUseSapGui()
+    <li>JCoCustomRepository.QueryMode.DISABLE_REPOSITORY_POOL
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>NullPointerException in Delta Management on ABAP callbacks</b></td></tr>
+<tr><td>
+If an ABAP function module executes a function via destination <tt>BACK</tt>, a <code>NullPointerException</code> could be thrown
+by delta management in JCo. The exception is raised only, if the function module invoked in ABAP has some table parameters.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of multiple repositories for a single JCoServer</b></td></tr>
+<tr><td>
+It is now possible to specify more than one repository for <code>JCoServer</code> and thus be able to
+handle requests from various ABAP systems, even if requests base on incompatible function module definitions.
+In order to define multiple repositories, JCo introduces a new configuration property: <code>jco.server.repository_map</code>.
+Examples how to use it are available in the API documentation of <code>ServerDataProvider</code>.
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support of dynamic worker thread allocation for JCoServer</b></td></tr>
+<tr><td>
+It is now possible to specify the minimum and maxmimum number of worker threads that shall be used for a JCo Server
+via the new server properties jco.server.worker_thread_min_count and jco.server.worker_thread_count.
+Mor edetails are available in the API documentation of <code>ServerDataProvider</code>.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Invalid characters accepted for BCD</b></td></tr>
+<tr><td>
+When setting a value for a field that is containing a BCD value, and that value contains an invalid character,
+e.g. an 'a', this value is accepted without error instead of throwing an exception.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for cancelling function invocations on session end</b></td></tr>
+<tr><td>
+When a function module invocation is lasting very long, and as a consequence the session, in which that call was executed, has
+been finished in the meantime, JCo now requests on the ABAP server that the function module execution shall be cancelled, in order
+to free resources.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Loss of tRFC requests</b></td></tr>
+<tr><td>
+When executing multiple tRFCs in parallel threads, some of the tRFCs get lost without any error message.
+In particular, this can lead to data loss during IDoc communication between a JCo 3.0 based program
+and the ABAP back-end system.
+See also note <a href="https://service.sap.com/sap/support/notes/1438660">1438660</a>.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Performance improvement for stateless function module calls</b></td></tr>
+<tr><td>
+By default, function module invocations are done stateless within JCo 3.0. This means that the context in the ABAP back-end
+associated with a connection used for a function module invocation is reset after finishing the request. Unfortunately, this is
+much slower for many small requests than executing stateful due to the existing reset mechanism. With a small improvement within
+the JCo runtime the reset mechanism could be improved, but requires also an enhancement in the ABAP back-end side. If that enhancement
+is not available, the behavior will stay like before. Note <a href="https://service.sap.com/sap/support/notes/1433584">1433584</a>
+describes which kernel patch level is necessary for the ABAP server.
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.4</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>JCoException with text "Incorrect size of TID encountered [null]" thrown for synchronous client call</b></td></tr>
+<tr><td>
+If a destination is set to stateful, a qRFC call is executed, and afterwards a synchronous call is executed for the same destination, the JCoException with the message
+mentioned above is thrown though this should work fine without any problem.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Exception JCO_ERROR_CONFIGURATION on JCoCustomDestination</b></td></tr>
+<tr><td>
+JCoException with the key <tt>JCO_ERROR_CONFIGURATION</tt> is thrown on a JCoCustomDestination, if the original JCoDestination it was created from
+does not contain any user authentication parameters.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Unnecessary refresh on deregistration of DestinationDataProvider</b></td></tr>
+<tr><td>
+If a DestinationDataProvider is changed or removed, the JCo runtime refreshes the cached destinations. Due to a bug in the
+refresh operation, the instance of the DestinationDataProvider was used that was just in being deregistered, and not the new one as it should be.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>z/OS: ERROR hostname 'abcd' unknown </b></td></tr>
+<tr><td>
+Even though the technical connection to a certain host was working fine outside JCo, establishing a connection
+with JCo to an SAP system failed. This was caused by some EBCDIC/ASCII translation issues in a very low level
+API. See also note <a href="https://service.sap.com/sap/support/notes/1406061">1406061</a>.
+
+</td></tr>
+
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.3</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for dealing with bgRFC units</b></td></tr>
+<tr><td>
+It is now possible to interact with SAP AS ABAP back-ends supporting the successor of tRFC and qRFC
+completely in native bgRFC mode, both for client and server applications. Certainly, the back-end release
+has to support bgRFC as well. For details check out the API documentation of the interfaces and enums below:
+<code>
+<ul>
+    <li>JCoFunctionUnit
+    <li>JCoRequestUnit
+    <li>JCoUnitIdentifier
+    <li>JCoBackgroundUnitAttributes
+    <li>JCoFunctionUnitState
+    <li>JCoServerUnitIDHandler
+</ul>
+</code>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for ABAP class exceptions</b></td></tr>
+<tr><td>
+Starting with ABAP application server release 7.11 it is possible to use function modules throwing an
+abap class exception between two ABAP systems. With 7.20 the support was extended to connectors as well,
+including JCo 3.0. Hence, more context of the application in the ABAP system can be transferred in
+such an exception object, which makes it easier to find causes of undesired behavior of the application.
+For details check out the API documentation of the classes and interfaces below:
+<code>
+<ul>
+    <li>AbapClassException
+    <li>JCoRemoteContext
+    <li>JCoAbapObject
+    <li>JCoClassMetaData
+    <li>JCoFunction
+</ul>
+</code>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Changing parameters are not updated</b></td></tr>
+<tr><td>
+When a function module had a changing parameter, and the application did not set any value to it, before
+invoking function module in the back-end, the updates to it in the back-end were not received by the Java
+application.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>StackOverflowError in MetaDataStorage</b></td></tr>
+<tr><td>
+Under certain circumstances it could occur when some metadata object is stored in a
+repository's data store. The call stack of the error included the following sequence very often:
+<pre>
+    at com.sap.conn.jco.rt.MetaDataStorage.updateParents()
+    at com.sap.conn.jco.rt.MetaDataStorage.saveRecordMetaData()
+    at com.sap.conn.jco.rt.MetaDataStorage.storeNestedMetaData()
+    at com.sap.conn.jco.rt.MetaDataStorage.saveFunctionTemplate()
+    at com.sap.conn.jco.rt.MetaDataStorage.updateParents()
+    at com.sap.conn.jco.rt.MetaDataStorage.saveRecordMetaData()
+    at com.sap.conn.jco.rt.MetaDataStorage.storeNestedMetaData()
+    at com.sap.conn.jco.rt.MetaDataStorage.saveFunctionTemplate()
+    at com.sap.conn.jco.rt.MetaDataStorage.updateParents()
+    at com.sap.conn.jco.rt.MetaDataStorage.saveRecordMetaData()
+    at com.sap.conn.jco.rt.MetaDataStorage.storeNestedMetaData()
+    ...
+</pre>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>JCo cuts off the last field of a structure or table row</b></td></tr>
+<tr><td>
+See also note <a href="https://service.sap.com/sap/support/notes/1358698">1358698</a>.
+If a table or strufture definition was extended compatibly between two releases by simply extending the last field, e.g.
+by extending a CHAR 5 field to CHAR 10, and JCo was only aware of the shorter version of the metadata, but the longer one
+was sent to JCo, the value of that field was simply not stored, and the field remained initial. In particular, this occurred
+as well, if there was only a single field in the structure or table row.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Exception text was not sent to caller</b></td></tr>
+<tr><td>
+When an implementation of a <code>JCoServerTIDHandler</code> threw an exception within checkTID, the text was
+not sent to the caller.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>NullPointerException in JCoServer</b></td></tr>
+<tr><td>
+When a <code>JCoServer</code> was started twice, because of some minor changes, and was not stopped properly before,
+and the <code>ServerDataProvider</code> did not support events, this could lead to a NullPointerException, when a
+new request for this server was coming in.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.2</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCoCustomDestination.setTrace()
+    <li>JCoCustomDestination.setCodepage()
+    <li>JCoAttributes.getOwnBytesPerChar()
+    <li>JCoAttributes.getPartnerBytesPerChar()
+    <li>Environment.isDestinationDataProviderRegistered()
+    <li>Environment.isServerDataProviderRegistered()
+    <li>Environment.isSessionReferenceProviderRegistered()
+    <li>Environment.isClientPassportManagerRegistered()
+    <li>Environment.isServerPassportManagerRegistered()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for hanging JCoServer if connections were set to stateful</b></td></tr>
+<tr><td>
+See also note <a href="https://service.sap.com/sap/support/notes/1298438">1298438</a>.
+When setting its connections to stateful, a <code>JCoServer</code> could hang completely when the gateway on which the server has been registered is
+sending a ping to the server connection because the ABAP client has not been sending requests for a while. The JCoServer connection then
+ends up in a call stack for server threads in a thread dump that looks similar to the following one:
+<pre>
+"sap.rfc.Listener SAPBC 10.20.3.20" cpu=136953.28 [reset 136953.28] ms allocated=30367383456 B (28.28 GB)
+  [reset 30367383456 B (28.28 GB)] prio=6 tid=0x0000000015328b50 nid=0x1960 runnable
+  [0x000000001922f000..0x000000001922f7d0]
+  java.lang.Thread.State: RUNNABLE
+    at com.sap.conn.rfc.driver.CpicDriver.nativeCpic_coxread([BI[B[I)I(Native Method)
+    at com.sap.conn.rfc.driver.CpicDriver.cpic_coxread(I[B[I)I(CpicDriver.java:692)
+    at com.sap.conn.rfc.driver.RfcTypeRegisterCpic.listen([BI[II)I(RfcTypeRegisterCpic.java:70)
+    - locked <0x000000018b411e68> (a com.sap.conn.rfc.driver.RfcTypeRegisterCpic)
+    at com.sap.conn.rfc.engine.RfcIoOpenCntl.ab_rfclisten(I)I(RfcIoOpenCntl.java:1293)
+    at com.sap.conn.rfc.engine.RfcIoOpenCntl.RfcListen(I)I(RfcIoOpenCntl.java:2194)
+    at com.sap.conn.jco.rt.MiddlewareJavaRfc$JavaRfcServer.listen(LServerWorker;)V(MiddlewareJavaRfc.java:2060)
+    at com.sap.conn.jco.rt.DefaultServerWorker.dispatch()V(DefaultServerWorker.java:259)
+    at com.sap.conn.jco.rt.DefaultServerWorker.loop()V(DefaultServerWorker.java:321)
+    at com.sap.conn.jco.rt.DefaultServerWorker.run()V(DefaultServerWorker.java:220)
+    at com.wm.util.TimeWrappingProvider$TimeMesuredTask.run()V(TimeWrappingProvider.java:40)
+    at com.wm.pkg.sap.rfc.ListenerThread.run()V(ListenerThread.java:70)
+    - locked <0x000000017757a778> (a java.lang.Thread for sap.rfc.Listener BCSAPPRD 172.27.1.23)
+</pre>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in treatment of one-digit BCD value</b></td></tr>
+<tr><td>
+BCD fields were filled incorrectly if a one-digit value was set (e.g. 4 or 7). The resulting value was always 0 (or 0.0 - with n 0 after the dot if the number of decimals is n in the metadata definition).
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for exception group in case of wrong credentials</b></td></tr>
+<tr><td>
+Error group <code>JCO_ERROR_CANCELLED</code> was used instead of <code>JCO_ERROR_LOGON_FAILURE</code>, moreover the error message was misleading.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfixes in session context handling</b></td></tr>
+<tr><td>
+<ul>
+    <li>It was possible that the context which timed out was not removed from the list of existing contexts by the session
+        timeout checker. This could create unnecessary checks for sessions that have already been cleaned up.
+    <li>Contexts that have been initiated by a stateful JCo server were not removed immediately after the connection
+        had been closed by the ABAP client.
+</ul>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for plain-text password in trace</b></td></tr>
+<tr><td>
+The trace file could contain a trace entry, in which you find the string
+'jco.destination.repository.passwd=' followed by the password for the repository user, i.e. the user with which
+metadata information is queried in the SAP system.<br>
+See also security note <a href="https://service.sap.com/sap/support/notes/1312880">1312880</a>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for stateful JCoServer connections</b></td></tr>
+<tr><td>
+Stateful server connections could not be set to stateless again.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for session events triggered by JCoServer connections</b></td></tr>
+<tr><td>
+The events for sessions started by a <code>JCoServer</code> could be triggered more often than necessary. In particular, this was
+true for the <code>jcoServerSessionStarted()</code> event, for which then there did not exist a corresponding <code>jcoServerSessionFinished()</code>
+event. As a consequence too many idling sessions were created in the runtime environment.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for JCoServerMonitor information</b></td></tr>
+<tr><td>
+Under very high load both <code>getUsedServerThreadCount()</code> and <code>getMaximumUsedServerThreadCount()</code> were increasing above
+the configured maximum until the load was lower again and then remained at the wrong high level.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in numeric handling of signed or empty field values</b></td></tr>
+<tr><td>
+A <code>ConversionException</code> was thrown when trying to get an empty or signed value
+from a field of type <code>CHAR</code> as a converted numeric value. The following <code>JCoRecord</code>
+methods were affected: <code>getInt()</code>, <code>getShort()</code>, <code>getLong()</code>,
+<code>getBigInteger()</code>, <code>getDouble()</code>, <code>getFloat()</code> and <code>getBigDecimal()</code>.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in repository for nested vector types</b></td></tr>
+<tr><td>
+Table types that referred to a table type as line type which itself refers again to a table type as line type and
+table types that referred to a table type as line type which referse to a domain as line type were not correctly
+stored in the repository, when being looked up from an ABAP system. As a consequence function modules that had parameters
+of such a type could not be processed correctly.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for java.lang.UnsatisfiedLinkError</b></td></tr>
+<tr><td>
+A <code>java.lang.UnsatisfiedLinkError</code> occurred with the message <code>com.sap.i18n.cp.ConverterJNI.ConvertCToXArrR([B[CII[BII[I)I</code>, when a blended
+codepage such as 6100 is used.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for starting SAP GUI on Unix and MacOS</td></tr>
+<tr><td>
+If the path to the SAP GUI contained blanks, starting the Java GUI failed. On MacOS, in addition some startup parameters
+needed to be adopted.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for tables in changing parameter lists</b></td></tr>
+<tr><td>
+If a table was part of the changing parameter list, and was not containing any row when executing the function module, then
+the table was always returned empty.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Enhancement for destination and server configuration management</b></td></tr>
+<tr><td>
+If a configuration was updated, and someone uses a cached instance of a JCoServer or JCoDestination, an exception will be thrown to signal
+that this instance is outdated.
+</td></tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr><td>&nbsp;</td></tr>
+<tr><td><FONT SIZE="+1"><B>Release notes 3.0.1</B></FONT></td></tr>
+<tr><td>&nbsp;</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Improved documentation</b></td></tr>
+<tr><td>
+An example for a CustomDestinationDataProvider has been added.
+<p>API documentation has been extended and improved.</p>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>New APIs</b></td></tr>
+<tr><td>
+The following new APIs have been added and are available for general use:
+<code>
+<ul>
+    <li>JCo.getTraceLevel()
+    <li>JCo.getTracePath()
+    <li>JCoConnectionData.getSystemID()
+</ul>
+</code>
+See the API documentation for details.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Support for SAP GUI</b></td></tr>
+<tr><td>
+JCo is now able to start a SAP GUI on the local machine and associate it with a newly opened RFC connection.
+The back-end prerequisites for this new feature are listed in note
+<a href="https://service.sap.com/sap/support/notes/1258724">1258724</a>. Starting the SAP GUI can be controlled
+by the additional destination parameter <code>jco.client.use_sapgui</code>.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in dispatcher worker thread</b></td></tr>
+<tr><td>
+The dispatcher worker thread might have been finished after errors occurring under heavy load. The thread dump
+does not contain a thread called <code>JCoDispatcherWorkerThread</code> in this case.
+<br>
+The dispatcher worker thread might be started more than once due to insufficient synchronization. The thread dump
+contains more than one thread called <code>JCoDispatcherWorkerThread</code> in this case.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for functions containing more than 127 non-scalar parameters</b></td></tr>
+<tr><td>
+Functions with more than 127 non-scalar parameters caused an <code>ArrayIndexOfBoundsException</code>. The fix required a change for the
+serial version UID of many data containers and metadata instances so that serialized instances of these classes can no longer be exchanged
+with previous releases.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for ArrayIndexOutOfBoundsException on receive</b></td></tr>
+<tr><td>
+<code>ArrayIndexOutOfBoundsExceptions</code> might be thrown while receiving data (output parameters in client scenario or
+input parameters in server scenario). The exception is thrown if the ABAP side has extended the data strcutures used
+by the current function module compared to JCo's own metadata definition.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for JCO_ERROR_DSR_PASSPORT_NOT_RECEIVED</b></td></tr>
+<tr><td>
+A <code>JCoException</code> with the key <code>JCO_ERROR_DSR_PASSPORT_NOT_RECEIVED</code> was thrown in a JCo server on second
+and subsequent stateful requests.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in treatment of default BCD value</b></td></tr>
+<tr><td>
+BCD fields were filled incorrectly if the default values was set. On the ABAP side the incorrect content of the BCD
+field caused short dumps (ABAP runtime error BCD_BADDATA).
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix in firing of server events</b></td></tr>
+<tr><td>
+The event <code>ALIVE</code> was not fired by the JCo runtime, if the ABAP system/gateway hase gone online when
+the server was in the state <code>DEAD</code>. That might cause that the server application remained in the
+the waiting state.
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for native crash during stateful server communication</b></td></tr>
+<tr><td>
+A native crash occurred on stateful requests from ABAP to Java
+<ul>
+    <li>on the second or any subsequent request during a stateful server communication
+    <li>and if the request data volume was greater than 16000 bytes in the internal RFC representation
+</ul>
+</td></tr>
+
+<tr  BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"><td><b>Bugfix for server connection leak</b></td></tr>
+<tr><td>
+The JCo server did not release the internal connection handle properly, if the gateway was protected
+with an ACL and the connection was declined. After a while all internal handles were used and either an <code>ArrayIndexOutOfBoundsException: 10000</code> was thrown and
+logged to dev_jco_rfc.trc each time a new connection was required. <br>
+This is the same issue as described in note <a href="https://service.sap.com/sap/support/notes/1252962">1252962</a>.
+</td></tr>
+
+<TR>
+<TD>
+<hr>
+</TD>
+</TR>
+<TR>
+<TD>
+<i>Copyright &#169; 2008-2016 SAP SE. All Rights Reserved.</i>
+</TD>
+</TR>
+</BODY>
+</HTML>
