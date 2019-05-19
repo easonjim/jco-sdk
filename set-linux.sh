@@ -14,6 +14,7 @@ if type -p git; then
     type -p git
 else 
     echo -e "git not install!"
+    exit 1
 fi
 
 # create dir 

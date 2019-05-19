@@ -3,7 +3,7 @@
 * 全版本SDK版本：3.0.11-720.612  
 * Linux有个比较新的版本：3.0.16
 ## SDK配置（64位）
-下载SDK：  
+下载SDK：  
 ```shell
 mkdir -p /data/service/jco-sdk
 git clone https://github.com/easonjim/jco-sdk.git /data/service/jco-sdk
@@ -13,7 +13,7 @@ git clone https://github.com/easonjim/jco-sdk.git /data/service/jco-sdk
 ```shell
 # 设置
 echo "export LD_LIBRARY_PATH=/data/service/jco-sdk/3.0.11-720.612/linuxx86_64/libsapjco3.so" >> /etc/profile
-# 或（推荐此种方式）
+# 或（推荐此种方式）
 cat > /etc/profile.d/jco.sh <<EOF
 export LD_LIBRARY_PATH=/data/service/jco-sdk/3.0.11-720.612/linuxx86_64/libsapjco3.so
 EOF
@@ -46,7 +46,7 @@ echo "export JAVA_LIBRARY_PATH=/data/service/jco-sdk/3.0.11-720.612/darwinintel6
 #### Mac注意
 * 针对Java 8+在Mac系统下，设置环境变量需要变更为：
     * LD_LIBRARY_PATH->JAVA_LIBRARY_PATH  
-* 而针对Java 7及以前，Mac某些版本系统可能需要变更为（不是绝对，可以尝试）：
+* 而针对Java 7及以前，Mac某些版本系统可能需要变更为（不是绝对，可以尝试）：
     * LD_LIBRARY_PATH->DYLD_LIBRARY_PATH
 ### Windows
 将ntamd64/sapjco3.dll拷贝到c:/windows/system32与C:\Program Files (x86)\Java\jdk1.7.0_51\bin下
@@ -94,7 +94,7 @@ Specification-Version: 3.0.16
 - 设置LD_LIBRARY_PATH
 ### 使用传统Web项目
 - 添加jar到项目目录
-- 添加动态链接库到Web容器的jre目录，比如Tomcat的Jre目录下
+- 添加动态链接库到Web容器的jre目录，比如Tomcat的jre目录下
 ### 使用hibersap组件（推荐使用这种方式）
 * 官网：https://github.com/hibersap/hibersap  
 * demo：http://hibersap.org/example/  
@@ -131,9 +131,9 @@ mvn install:install-file -DgroupId=org.hibersap -DartifactId=com.sap.conn.jco.sa
 ## 自动配置脚本
 ### Linux
 ```shell
-curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-linux.sh | bash -s "linux set jco sdk env" 2>&1 | tee jco-sdk-set-linux.log
+curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-linux.sh | bash -s "linux set jco sdk env" 2>&1 | tee jco-sdk-set-linux.log
 ```
 ### Mac
 ```shell
-curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-mac.sh | bash -s "mac set jco sdk env" 2>&1 | tee jco-sdk-set-mac.log
+curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-mac.sh | bash -s "mac set jco sdk env" 2>&1 | tee jco-sdk-set-mac.log
 ```
