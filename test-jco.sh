@@ -11,7 +11,7 @@ fi
 
 # check java
 if type -p java; then
-    type -p java
+    echo -e "java is installed!"
 else 
     echo -e "java not install!"
     exit 1
