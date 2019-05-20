@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# define env
+JCO_DIR_USER="www-data"
+
+# main
+while [ "$1" != "${1##[-+]}" ]; do
+  case $1 in
+    --jco-dir-user)
+           JCO_DIR_USER=$2
+           shift 2
+           ;;
+    --jco-dir-user=?*)
+           JCO_DIR_USER=${1#--jco-dir-user=}
+           shift
+           ;;
+  esac
+done
+
 # fix dir bug
 cd `dirname $0`
 
@@ -8,9 +25,6 @@ if [[ "$(whoami)" != "root" ]]; then
     echo "please run this script as root !" >&2
     exit 1
 fi
-
-# define env
-JCO_DIR_USER="www-data"
 
 # check git
 if type -p git; then
@@ -59,17 +73,3 @@ fi
 echo -e "dir user is:"${JCO_DIR_USER}
 chown -R ${JCO_DIR_USER}:${JCO_DIR_USER} /data/service/jco-sdk
 echo -e "end set dir..."
-
-# main
-while [ "$1" != "${1##[-+]}" ]; do
-  case $1 in
-    --jco-dir-user)
-           JCO_DIR_USER=$2
-           shift 2
-           ;;
-    --jco-dir-user=?*)
-           JCO_DIR_USER=${1#--jco-dir-user=}
-           shift
-           ;;
-  esac
-done
