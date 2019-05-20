@@ -21,7 +21,7 @@ done
 cd `dirname $0`
 
 # check root
-if [[ "$(whoami)" != "root" ]]; then
+if [[ "$(id -u)" != "0" ]]; then
     echo "please run this script as root !" >&2
     exit 1
 fi
