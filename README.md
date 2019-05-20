@@ -3,6 +3,9 @@
 * 全版本SDK版本：3.0.11-720.612  
 * Linux有个比较新的版本：3.0.16
 * 新添加3.0.17版本的Linux/Windows/Mac，但Mac下只有3.0.11，毕竟在生产环境Mac不会影响太大
+# 官方下载
+下载必须是SAP SMP (Market Place) valid account，也就是SAP管理员分配的子账号。
+* [jco download](https://support.sap.com/en/product/connectors/jco.html)
 ## SDK配置（64位）
 下载SDK：  
 ```shell
