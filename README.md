@@ -130,6 +130,7 @@ mvn install:install-file -DgroupId=org.hibersap -DartifactId=com.sap.conn.jco.sa
 因此，只能通过shell脚本进行环境变量配置。
 
 ## 自动配置脚本
+注意：下面脚本默认用回为www-data，需要在实际使用中指定jco-sdk文件夹的用户，通过这个参数：--jco-dir-user="user1"
 ### Linux
 ```shell
 curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-linux.sh | bash -s "linux set jco sdk env" 2>&1 | tee jco-sdk-set-linux.log
