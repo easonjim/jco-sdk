@@ -30,7 +30,7 @@ fi
 if type -p git; then
     echo -e "git is install!"
 else 
-    echo -e "git not install! plase install use: yum install -y git"
+    echo -e "git not install! please install use: yum install -y git"
     exit 1
 fi
 
@@ -47,7 +47,7 @@ echo -e "end clone project..."
 # init env
 echo -e "start set env..."
 cat > /etc/profile.d/jco.sh <<EOF
-export LD_LIBRARY_PATH=/data/service/jco-sdk/3.0.11-720.612/linuxx86_64/libsapjco3.so
+export LD_LIBRARY_PATH=/data/service/jco-sdk/3.0.11-720.612/linuxx86_64
 EOF
 # 生效
 source /etc/profile

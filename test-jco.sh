@@ -17,5 +17,7 @@ else
     exit 1
 fi
 
+read -p "The test jco script use less, exit this test you can use [Ctrl + C] or [Q]; in the time you must [Enter] to next test." TEST_INPUT
+
 # test
 java -jar /data/service/jco-sdk/3.0.11-720.612/sapjco3.jar | less
