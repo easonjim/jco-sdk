@@ -135,21 +135,21 @@ mvn install:install-file -DgroupId=org.hibersap -DartifactId=com.sap.conn.jco.sa
 ##### 2、项目引入  
 ```shell
 # POM
-        <dependency>
-            <groupId>org.hibersap</groupId>
-            <artifactId>hibersap-core</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibersap</groupId>
-            <artifactId>hibersap-jco</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibersap</groupId>
-            <artifactId>com.sap.conn.jco.sapjco3</artifactId>
-            <version>3.0.11</version>
-        </dependency>
+<dependency>
+    <groupId>org.hibersap</groupId>
+    <artifactId>hibersap-core</artifactId>
+    <version>1.3.0</version>
+</dependency>
+<dependency>
+    <groupId>org.hibersap</groupId>
+    <artifactId>hibersap-jco</artifactId>
+    <version>1.3.0</version>
+</dependency>
+<dependency>
+    <groupId>org.hibersap</groupId>
+    <artifactId>com.sap.conn.jco.sapjco3</artifactId>
+    <version>3.0.11</version>
+</dependency>
 ```
 ##### 3、配置环境变量
 ```shell
@@ -169,13 +169,13 @@ curl -fsSL https://raw.githubusercontent.com/easonjim/jco-sdk/master/set-mac.sh 
 ```
 #### 配置Maven
 ```shell
-        <dependency>
-            <groupId>org.hibersap</groupId>
-            <artifactId>com.sap.conn.jco.sapjco3</artifactId>
-            <version>3.0.11</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/sapjco3.jar</systemPath>
-        </dependency>
+<dependency>
+    <groupId>org.hibersap</groupId>
+    <artifactId>com.sap.conn.jco.sapjco3</artifactId>
+    <version>3.0.11</version>
+    <scope>system</scope>
+    <systemPath>${project.basedir}/lib/sapjco3.jar</systemPath>
+</dependency>
 ```
 通过以上配置，即可成功运行项目，但如果要打包成可运行的jar包，那么需要在POM增加如下插件
 ```xml
