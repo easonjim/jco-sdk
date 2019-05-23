@@ -263,4 +263,4 @@ System.setProperty("java.library.path", path+"/native-lib");
 ```
 * 上面的方式展示了Spring Boot的用法，总的感觉思路是对了，但是对接非常麻烦，jar包能找，并要求在本地，复制的过程要封装代码，太繁琐
 * 所以总结了一下，不如做一个通用的jar和jar-loader放在中央仓库下，只需配置好之后就能全部完成上面的操作。像sigar-loader的方式一样
-* 下面是我封装的项目jar包，直接中央仓库即可获取：
+* 下面是我封装的项目jar包，直接中央仓库即可获取：[jco-loader](https://github.com/easonjim/jco-loader)
