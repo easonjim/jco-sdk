@@ -97,9 +97,13 @@ Specification-Version: 3.0.16
 ```
 
 ## 注意
-上面设置的变量都是Environment Property，而不能设置在System Property中，并且Java不能设置Environment，所以也就不能封装成Jar包，在启动时自动加载so文件，比如像这个项目：[sigar-loader](https://github.com/kamon-io/sigar-loader)  
-因此，只能通过shell脚本进行环境变量配置。  
-由于历史原因，上面说法是错误的（用力甩一巴掌打脸！），其实除了Environment Property，jcosap.jar还会去找java.library.path这个路径，所以在启动时设置这个路径就能成功加载，比如这样设置是成功的：System.setProperty("java.library.path", "/data/service/jco-sdk/3.0.11-720.612/linuxx86_64");，需要特别注意，设置java.library.path路径时远没有前面的一句话这么简单，还需要根据环境进行判断叠加路径，因此这里是一个思路。那么接下来就是封装一个jar包：jar-loader，功能实现类似上面的sigar-loader
+* 上面设置的变量都是Environment Property，而不能设置在System Property中，并且Java不能设置Environment，所以也就不能封装成Jar包，在启动时自动加载so文件，比如像这个项目：[sigar-loader](https://github.com/kamon-io/sigar-loader)  
+* 因此，只能通过shell脚本进行环境变量配置。  
+* 由于历史原因，上面说法是错误的（用力甩一巴掌打脸！），其实除了Environment Property，jcosap.jar还会去找java.library.path这个路径，所以在启动时设置这个路径就能成功加载，比如这样设置是成功的：System.setProperty("java.library.path", "/data/service/jco-sdk/3.0.11-720.612/linuxx86_64");，需要特别注意，设置java.library.path路径时远没有前面的一句话这么简单，还需要根据环境进行判断叠加路径，因此这里是一个思路。那么接下来就是封装一个jar包：jar-loader，功能实现类似上面的sigar-loader
+* 总结一下动态链接库的查找路径顺序
+   * local jar file dir
+   * environment variable (LD_LIBRARY_PATH/DYLD_LIBRARY_PATH/JAVA_LIBRARY_PATH)
+   * system property (java.library.path)
 
 ## 自动配置脚本
 注意：下面脚本默认用回为www-data，需要在实际使用中指定jco-sdk文件夹的用户，通过这个参数：--jco-dir-user="user1"
